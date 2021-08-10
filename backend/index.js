@@ -1,6 +1,5 @@
 const express = require("express");
 const formidable = require("express-formidable");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 
