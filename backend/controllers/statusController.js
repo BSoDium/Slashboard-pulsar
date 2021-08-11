@@ -17,6 +17,7 @@ exports.getStatus = async (req, res) => {
       console.log("\nStatus request attempt - key is correct.");
       const content = {
         "status": "active",
+        "name": os.hostname(),
         "cpus": os.cpus(),
         "memory": {
           "total": os.totalmem(),
