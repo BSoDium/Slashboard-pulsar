@@ -4,5 +4,30 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.formatOnSave": true,
+		"conventionalCommits.scopes": [
+			"frontend"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch electron",
+				"type": "node",
+				"request": "launch",
+				"cwd": "${workspaceRoot}",
+				"program": "${workspaceRoot}/src/index.js",
+				"stopOnEntry": false,
+				"args": [],
+				"windows": {
+					"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+				},
+				"linux": {
+					"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron"
+				}
+			  }
+		]
+	}
 }

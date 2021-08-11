@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/l3alr0g/server-dashboard",
+  "author": "l3alr0g",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "electron": "^13.1.9",
+    "eslint": "^7.32.0"
+  },
+  "scripts": {
+    "start": "electron ./src"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "eslint-plugin-react": "^7.24.0"
+  }
+}
