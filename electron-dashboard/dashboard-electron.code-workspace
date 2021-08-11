@@ -5,10 +5,13 @@
 		}
 	],
 	"settings": {
-		"editor.formatOnSave": true,
 		"conventionalCommits.scopes": [
 			"frontend"
-		]
+		],
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"eslint.validate": ["javascript"]
 	},
 	"launch": {
 		"version": "0.2.0",
