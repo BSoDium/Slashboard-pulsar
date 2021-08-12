@@ -39,10 +39,6 @@ ${chalk.whiteBright.bgGreen.bold('yarn remove your-package')}
 ${chalk.whiteBright.bgRed.bold('yarn add your-package')}
  ${chalk.bold('Install the package to "./src/package.json"')}
 ${chalk.whiteBright.bgGreen.bold('cd ./src && yarn add your-package')}
- Read more about native dependencies at:
-${chalk.bold(
-  'https://electron-react-boilerplate.js.org/docs/adding-dependencies/#module-structure'
-)}
  `);
       process.exit(1);
     }
