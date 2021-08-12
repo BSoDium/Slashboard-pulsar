@@ -17,12 +17,16 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Launch via yarn",
-				"type": "node",
+				"name": "Yarn start",
+				"type": "pwa-node",
 				"request": "launch",
 				"cwd": "${workspaceRoot}",
 				"args": ["start"],
-				"runtimeExecutable": "yarn"
+				"runtimeExecutable": "yarn",
+				"resolveSourceMapLocations": [
+					"${workspaceFolder}/",
+					"!/node_modules/**"
+			],
 			  }
 		]
 	}
