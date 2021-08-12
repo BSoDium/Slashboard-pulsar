@@ -17,19 +17,16 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Launch electron",
-				"type": "node",
+				"name": "Yarn start",
+				"type": "pwa-node",
 				"request": "launch",
 				"cwd": "${workspaceRoot}",
-				"program": "${workspaceRoot}/src/index.js",
-				"stopOnEntry": false,
-				"args": [],
-				"windows": {
-					"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
-				},
-				"linux": {
-					"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron"
-				}
+				"args": ["start"],
+				"runtimeExecutable": "yarn",
+				"resolveSourceMapLocations": [
+					"${workspaceFolder}/",
+					"!/node_modules/**"
+			],
 			  }
 		]
 	}
