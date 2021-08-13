@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "conventionalCommits.scopes": ["frontend", "backend"],
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": true
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Start electron app",
+        "type": "pwa-node",
+        "request": "launch",
+        "cwd": "${workspaceRoot}/electron-dashboard",
+        "args": ["start"],
+        "runtimeExecutable": "yarn",
+        "resolveSourceMapLocations": [
+          "${workspaceFolder}/",
+          "!/node_modules/**"
+        ]
+      },
+      {
+        "name": "Start node server",
+        "type": "pwa-node",
+        "request": "launch",
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceRoot}/node-beacon",
+        "program": "${workspaceRoot}/node-beacon/index.js",
+        "__workspaceFolder": "${workspaceRoot}/node-beacon"
+      }
+    ]
+  }
+}

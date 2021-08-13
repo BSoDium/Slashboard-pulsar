@@ -1,0 +1,12 @@
+body {
+  font-family: Montserrat;
+  margin: 0;
+}
+
+:global .App {
+  display: flex;
+}
+
+:global .App-container {
+  width: 100%;
+}

@@ -1,4 +1,3 @@
-/* eslint global-require: off, import/no-extraneous-dependencies: off */
 
 const developmentEnvironments = ['development', 'test'];
 

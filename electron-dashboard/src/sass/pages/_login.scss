@@ -1,0 +1,91 @@
+:global .login-container {
+  background: linear-gradient(to right top, #e29829, #0fc8e0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+:global .login-card {
+  background: #ffffff;
+  border-radius: 5px;
+  width: 400px;
+  overflow: hidden;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 95px rgba(0, 0, 0, 0.12);
+}
+
+:global .card-header {
+  h1 {
+    font-size: 2em;
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 1.5em;
+    font-weight: lighter;
+    color: rgb(209, 209, 209);
+  }
+  background: #11225a;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+:global .card-body {
+  input,
+  button,
+  span {
+    margin: 5px 0px 5px 0px;
+  }
+  input {
+    height: 40px;
+    border-radius: 0px;
+    border: none;
+    border-bottom: grey 1px solid;
+    font-size: 1.2em;
+    &:focus {
+      background-color: rgb(229, 236, 248);
+      transition: linear 0.2s;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 40px 0px 30px 0px;
+}
+
+:global .settings-banner {
+  input {
+    margin-right: 0.5rem;
+    float: left;
+  }
+  label {
+    padding-top: 11px;
+    float: left;
+  }
+  a {
+    padding-top: 11px;
+    padding-left: 105px;
+  }
+  display: flex;
+  flex-direction: row;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+:global .login-submit {
+  input {
+    margin: 0.4rem;
+  }
+  span {
+    font-size: 0.9rem;
+  }
+  margin-top: 30px;
+  padding: 0px 10px 0px 10px;
+  align-items: center;
+}

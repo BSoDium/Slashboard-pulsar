@@ -30,8 +30,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Dashboard",
+    "appId": "org.erb.Dashboard",
     "files": [
       "dist/",
       "node_modules/",
@@ -98,8 +98,7 @@
     "name": "l3alr0g",
     "email": "negreljerzy.philippe@gmail.com"
   },
-  "contributors": [
-  ],
+  "contributors": [],
   "license": "MIT",
   "homepage": "https://github.com/l3alr0g/server-dashboard#readme",
   "jest": {
@@ -262,10 +261,5 @@
     "baseBranches": [
       "next"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

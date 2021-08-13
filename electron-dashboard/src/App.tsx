@@ -1,14 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage';
+import Login from 'containers/Login';
 
-import 'styles/_app.scss';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+import 'sass/main.scss'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface State {}
+interface Props { }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface State { }
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -19,9 +20,12 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <main className="App">
-        <Switch>
-          <Route path="/" component={HomePage} />
-        </Switch>
+        <div className="App-container">
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </div>
       </main>
     );
   }
