@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import HomePage from 'containers/HomePage';
+import Dashboard from 'containers/Dashboard';
 import Login from 'containers/Login';
 
 import 'sass/main.scss'
@@ -22,8 +22,12 @@ class App extends React.Component<Props, State> {
       <main className="App">
         <div className="App-container">
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/" component={HomePage} />
+            <Route path="/login" >
+              <Login />
+            </Route>
+            <Route path="/" >
+              <Dashboard />
+            </Route>
           </Switch>
         </div>
       </main>

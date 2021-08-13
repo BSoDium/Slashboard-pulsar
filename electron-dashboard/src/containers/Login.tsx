@@ -1,13 +1,10 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+
 interface Props {
-  history: RouteComponentProps["history"];
-  location: RouteComponentProps['location'];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface State {
   username: string;
   password: string;
@@ -50,13 +47,12 @@ class Login extends React.Component<Props, State> {
     // database stuff (not implemented yet)
 
     // atm we're just letting anyone login
-    this.props.history.push('/', { authFailed: false });
-    history.go(0)
+    // this.props.history.push('/', { authFailed: false });
   }
 
   render() {
     return (
-      <div className="login-container">
+      <div className="login-wrapper">
         <div className="login-card">
           <div className="card-header">
             <h1>L o g i n</h1>
@@ -67,15 +63,17 @@ class Login extends React.Component<Props, State> {
             <input type="password" id="password" name="password" placeholder="Password" required onChange={this.handleInputChange} />
 
             <div className="settings-banner">
-              <input
-                type="checkbox"
-                id="rememberme"
-                name="rememberMe"
-                style={{ marginTop: "0px" }}
-                onChange={this.handleCheckBoxChange}
-              />
-              <label htmlFor="rememberme">Remember me</label>
-              <a href="#">Forgot password</a>
+              <div className="autologin">
+                <input
+                  type="checkbox"
+                  id="autologin"
+                  name="rememberMe"
+                  style={{ marginTop: "0px" }}
+                  onChange={this.handleCheckBoxChange}
+                />
+                <label htmlFor="rememberme">Remember me</label>
+              </div>
+              <a href="#" className="password-retrieval">Forgot password</a>
             </div>
 
             <div className="login-submit">
