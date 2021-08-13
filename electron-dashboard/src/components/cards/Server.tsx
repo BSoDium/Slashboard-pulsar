@@ -39,7 +39,7 @@ class Server extends React.Component<Props, State> {
           <h2>Fetching data at {this.props.data.ip}:{this.props.data.port}...</h2>
         </div>
         :
-        <div>
+        <div className="server-wrapper">
           <h2>Server found at {this.props.data.ip}:{this.props.data.port}</h2>
           <div className="server-status">
             <p>

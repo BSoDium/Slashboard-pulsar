@@ -34,3 +34,11 @@
   color: #fff;
   box-sizing: border-box;
 }
+
+:global .server-wrapper {
+  background: #061a2b65;
+  width: fit-content;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
