@@ -7,7 +7,6 @@
   "settings": {
     "conventionalCommits.scopes": ["frontend", "backend"],
     "git.ignoreLimitWarning": true,
-    "editor.formatOnSave": true
   },
   "launch": {
     "version": "0.2.0",
