@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import ControlPanel from 'renderer/containers/ControlPanel';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+interface Props { }
 
 interface State {
   authFailed: boolean;

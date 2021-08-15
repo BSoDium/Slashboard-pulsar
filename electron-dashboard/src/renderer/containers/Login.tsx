@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+interface Props { }
 
 interface State {
   username: string;
@@ -78,7 +78,7 @@ class Login extends React.Component<Props, State> {
 
             <div className="settings-banner">
               <div className="autologin">
-                <label htmlFor="rememberme">
+                <label htmlFor="rememberme" className="remember-me">
                   <input
                     type="checkbox"
                     id="autologin"
@@ -86,7 +86,7 @@ class Login extends React.Component<Props, State> {
                     style={{ marginTop: '0px' }}
                     onChange={this.handleCheckBoxChange}
                   />
-                  Remember me
+                  <span>Remember me</span>
                 </label>
               </div>
               <a href="htpps://example.com" className="password-retrieval">
