@@ -15,7 +15,7 @@ class TitleBar extends React.Component<Props, State> {
   constructor(props: Props | Readonly<Props>) {
     super(props);
     this.state = {
-      fullscreen: true // should be set by electron 
+      fullscreen: false // should be set by electron 
     };
   }
 
