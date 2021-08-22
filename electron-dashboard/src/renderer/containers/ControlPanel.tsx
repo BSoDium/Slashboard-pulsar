@@ -3,10 +3,10 @@ import React from 'react';
 import ServerList from 'renderer/containers/ServerList';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+interface Props { }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface State {}
+interface State { }
 
 class ControlPanel extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -16,7 +16,7 @@ class ControlPanel extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="panel-wrapper">
+      <div className="main-card-wrapper">
         <ServerList />
         {/* there should also be a DeviceList element in future updates */}
       </div>

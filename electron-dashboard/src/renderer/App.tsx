@@ -1,9 +1,9 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-import Dashboard from 'renderer/containers/Dashboard';
 import Login from 'renderer/containers/Login';
+import HomePage from './containers/HomePage';
 
-import 'renderer/sass/main.scss';
+import 'renderer/App.global.css'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props { }
@@ -14,18 +14,18 @@ interface State { }
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-      this.state = {};
+    this.state = {};
   }
 
   render() {
     return (
       <Router>
         <Switch>
-          <Route path="/login">
+          <Route path="/login" >
             <Login />
           </Route>
           <Route path="/">
-            <Dashboard />
+            <HomePage />
           </Route>
         </Switch>
       </Router>

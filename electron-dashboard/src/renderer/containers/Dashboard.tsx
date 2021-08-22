@@ -1,33 +1,35 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 import ControlPanel from 'renderer/containers/ControlPanel';
+import SideBar from 'renderer/containers/SideBar';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props { }
 
 interface State {
-  authFailed: boolean;
+  tab: JSX.Element;
 }
 
 class Dashboard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      authFailed: false,
+      tab: <ControlPanel />
     };
+
+    this.setTab = this.setTab.bind(this);
+  }
+
+  setTab(tab: JSX.Element) {
+    this.setState({ tab });
   }
 
   render() {
-    const { authFailed } = this.state;
-    return authFailed ? (
-      <Redirect to="/login" />
-    ) : (
-      <div>
-        <div className="dashboard-wrapper">
-          <div className="sidebar">Sidebar data</div>
-          <ControlPanel />
-        </div>
+    const { tab } = this.state;
+    return (
+      <div className="dashboard-wrapper">
+        <SideBar tab={tab} setTab={this.setTab} />
+        {tab}
       </div>
     );
   }

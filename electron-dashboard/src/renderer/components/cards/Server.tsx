@@ -3,6 +3,19 @@ import React from 'react';
 
 import Loading from 'renderer/components/Loading';
 import serverIcon from 'renderer/assets/icons/server.svg';
+import pcIcon from 'renderer/assets/icons/pc.svg';
+import phoneIcon from 'renderer/assets/icons/smartphone.svg';
+
+
+interface iconDictionary {
+  [key: string]: string;
+}
+
+const icons: iconDictionary = {
+  server: serverIcon,
+  pc: pcIcon,
+  smartphone: phoneIcon
+};
 
 interface Props {
   data: any;
@@ -26,7 +39,6 @@ class Server extends React.Component<Props, State> {
     const fetchData = () => {
       const { data } = this.props;
       const url = `http://${data.ip}:${data.port}/${data.auth}/status`;
-      console.log(url);
       fetch(url)
         .then((response) => response.json())
         .then((response) => {
@@ -38,8 +50,6 @@ class Server extends React.Component<Props, State> {
         });
     };
     fetchData();
-    // eslint-disable-next-line react/destructuring-assignment
-    console.log(this.props.data.ip);
   }
 
   render() {
@@ -48,48 +58,48 @@ class Server extends React.Component<Props, State> {
     return (
       <div className="server-wrapper">
         <img
-          src={serverIcon}
+          src={icons[data.type]}
           className="server-icon"
           alt="serverIcon"
-          style={{ width: '100px', marginRight: '30px' }}
+          style={{ height: '100px', marginRight: '30px' }}
         />
-        {isLoading ? (
-          // fetch is in progress
-          <div className="server-loading">
+        <div className="server-details">
+          <h2>
+            <span style={{ color: "#00ffb3" }}>{data.ip}</span>
+            :
+            <span style={{ color: "#00eaff" }}>{data.port}</span>
+          </h2>
+          {isLoading ? (
+            // fetch is in progress
             <Loading />
-          </div>
-        ) : // fetch is complete
-        response === 'none' ? (
-          // fetch failed
-          <div className="server-noresponse">
-            <h2>
-              Failed to establish connection with server at {data.ip}:
-              {data.port}
-            </h2>
-            <p>Server is either misconfigured or inactive</p>
-            <div
-              className="tooltip"
-              style={{ fontSize: '0.9rem', color: 'grey' }}
-            >
-              An inactive server might be down for maintenance or under heavy
-              load. If this problem persists, check your node js configuration.
-            </div>
-          </div>
-        ) : (
-          // fetch succeeded
-          <div className="server-response">
-            <h2>
-              Established connection with server at {data.ip}:{data.port}
-            </h2>
-            <tr>name : {response.data.name}</tr>
-            <tr>status : {response.data.status}</tr>
-            <tr>
-              operating system : {response.data.os.type}&nbsp;
-              {response.data.os.architecture}&nbsp;build&nbsp;
-              {response.data.os.release}
-            </tr>
-          </div>
-        )}
+          ) : // fetch is complete
+            response === 'none' ? (
+              // fetch failed
+              <>
+                <div className="tag">
+                  <tr style={{ color: "red", fontWeight: "bold", textTransform: "uppercase" }}>Connection timeout</tr>
+                  <tr>status : <span style={{ color: "#f44336", fontWeight: "bold" }}>down</span></tr>
+                  <tr>Server is either misconfigured or inactive</tr>
+                  <div className="tooltip" style={{ marginTop: "5px" }}>
+                    An inactive server might be down for maintenance or under heavy
+                    load.<br />If this problem persists, check your node js configuration.
+                  </div>
+                </div>
+
+              </>
+            ) : (
+              // fetch succeeded
+              <div className="tag">
+                <tr style={{ color: "#5493ff", fontWeight: "bold", textTransform: "uppercase" }}>{response.data.name}</tr>
+                <tr>status : <span style={{ color: (response.data.status === "active" ? "#00ff88" : "#ff001e"), fontWeight: "bold" }}>{response.data.status}</span></tr>
+                <tr>
+                  operating system : {response.data.os.type}&nbsp;
+                  {response.data.os.architecture}&nbsp;build&nbsp;
+                  {response.data.os.release}
+                </tr>
+              </div>
+            )}
+        </div>
       </div>
     );
   }

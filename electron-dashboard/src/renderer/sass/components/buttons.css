@@ -1,0 +1,66 @@
+.btnPrimary,
+.btnSecondary {
+  height: fit-content;
+  width: fit-content;
+  padding: 10px 20px 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  transition: linear 0.2s;
+  cursor: pointer;
+}
+
+.btnPrimary:hover,
+.btnSecondary:hover {
+  transition: linear 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btnPrimary {
+  background-color: #1441d3;
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  background-color: #042db3;
+}
+
+.btnSecondary {
+  background-color: rgb(238, 238, 238);
+  color: #2a3147;
+}
+
+.btnSecondary:hover {
+  background-color: #d4d4d4;
+  color: #000;
+}
+
+.btnFlat {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #1441d3;
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.btnFlat:hover {
+  background-color: #d4d4d4;
+  color: #000;
+}
+
+.btnDock {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #1441d3;
+  color: #fff;
+}

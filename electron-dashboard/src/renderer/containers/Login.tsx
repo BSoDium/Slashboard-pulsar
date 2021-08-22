@@ -1,8 +1,6 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props { }
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 interface State {
   username: string;
@@ -10,8 +8,14 @@ interface State {
   rememberMe: boolean;
 }
 
-class Login extends React.Component<Props, State> {
-  constructor(props: Props) {
+class Login extends React.Component<any, State> {
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
+  constructor(props: any) {
     super(props);
     this.state = {
       username: '',
@@ -45,9 +49,13 @@ class Login extends React.Component<Props, State> {
   handleLogin() {
     // database stuff (not implemented yet)
     // atm we're just letting anyone login
-    const { username, password, rememberMe } = this.state;
-    console.log(username, password, rememberMe);
-    // history.push('/', { authFailed: false });
+    const { history } = this.props;
+    // const { username, password, rememberMe } = this.state;
+    history.push({
+      pathname: '/',
+      search: '',
+      state: { authSuccess: true }
+    });
   }
 
   render() {
@@ -114,4 +122,4 @@ class Login extends React.Component<Props, State> {
   }
 }
 
-export default Login;
+export default withRouter(Login);

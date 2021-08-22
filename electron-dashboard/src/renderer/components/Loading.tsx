@@ -6,12 +6,12 @@ interface Props {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface State {}
+interface State { }
 
 class Loading extends React.Component<Props, State> {
   // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
-    text: 'Loading...',
+    text: '',
     height: '100%',
   };
 
