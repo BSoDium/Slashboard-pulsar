@@ -1,7 +1,14 @@
-.dashboard-wrapper {
-  background: linear-gradient(to right top, #312b3a, #043e46);
+.window-wrapper {
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-wrapper {
+  background: linear-gradient(to right top, #312b3a, #043e46);
+  width: 100%;
+  height: 98%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -10,11 +17,12 @@
 
 .login-wrapper {
   background: linear-gradient(to right top, #e29829, #0fc8e0);
+  width: 100%;
+  height: 98%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  box-sizing: border-box;
 }
 
 .main-card-wrapper {
@@ -51,4 +59,14 @@
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.titlebar-wrapper {
+  box-sizing: border-box;
+  height: 2%;
+  background-color: #272d42;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }

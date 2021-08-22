@@ -20,7 +20,11 @@ class HomePage extends React.Component<any, HomePageState> {
     }
 
     render() {
-        const { authSuccess } = this.props.location.state || false;
+        // const { authSuccess } = this.props.location.state || false;
+
+        // atm the login page is skipped
+        const authSuccess = true;
+
         return (authSuccess ?
             <Dashboard />
             :

@@ -2,6 +2,7 @@ import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from 'renderer/containers/Login';
 import HomePage from './containers/HomePage';
+import TitleBar from './components/TitleBar';
 
 import 'renderer/App.global.scss'
 
@@ -20,10 +21,16 @@ class App extends React.Component<Props, State> {
       <Router>
         <Switch>
           <Route path="/login" >
-            <Login />
+            <div className="window-wrapper">
+              <TitleBar />
+              <Login />
+            </div>
           </Route>
           <Route path="/">
-            <HomePage />
+            <div className="window-wrapper">
+              <TitleBar />
+              <HomePage />
+            </div>
           </Route>
         </Switch>
       </Router>

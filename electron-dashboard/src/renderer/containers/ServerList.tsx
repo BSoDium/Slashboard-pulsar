@@ -81,7 +81,7 @@ class ServerList extends React.Component<Props, State> {
   }
 
   render() {
-    const { servers, timeSinceLastUpdate } = this.state;
+    const { servers, timeSinceLastUpdate, lastUpdated } = this.state;
     return (
       <div className="list-wrapper">
         <div className="list-title">
@@ -95,7 +95,6 @@ class ServerList extends React.Component<Props, State> {
                 lastUpdated: new Date(),
                 timeSinceLastUpdate: "now",
               });
-              this.forceUpdate();
             }}>
               <FontAwesomeIcon icon={faSync} style={{ paddingRight: "10px" }} />
               Reload
@@ -106,7 +105,7 @@ class ServerList extends React.Component<Props, State> {
           {servers.map((serverData) => {
             return (
               <Server
-                key={parseInt(serverData.ip.split('.').join(''), 10)}
+                key={parseInt(serverData.ip.split('.').join(''), 10) + lastUpdated.getTime()}
                 data={serverData}
               />
             );
