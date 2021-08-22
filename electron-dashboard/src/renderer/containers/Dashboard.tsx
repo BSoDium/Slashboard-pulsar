@@ -3,7 +3,6 @@ import React from 'react';
 import ControlPanel from 'renderer/containers/ControlPanel';
 import SideBar from 'renderer/containers/SideBar';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props { }
 
 interface State {

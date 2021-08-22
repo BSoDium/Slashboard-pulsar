@@ -95,7 +95,7 @@ class ServerList extends React.Component<Props, State> {
                 lastUpdated: new Date(),
                 timeSinceLastUpdate: "now",
               });
-              this.forceUpdate()
+              this.forceUpdate();
             }}>
               <FontAwesomeIcon icon={faSync} style={{ paddingRight: "10px" }} />
               Reload

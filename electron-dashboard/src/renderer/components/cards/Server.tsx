@@ -33,23 +33,26 @@ class Server extends React.Component<Props, State> {
       isLoading: true,
       response: null,
     };
+
+    this.fetchData = this.fetchData.bind(this);
+  }
+
+  fetchData() {
+    const { data } = this.props;
+    const url = `http://${data.ip}:${data.port}/${data.auth}/status`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ response, isLoading: false });
+        return response;
+      })
+      .catch(() => {
+        this.setState({ response: 'none', isLoading: false });
+      });
   }
 
   componentDidMount() {
-    const fetchData = () => {
-      const { data } = this.props;
-      const url = `http://${data.ip}:${data.port}/${data.auth}/status`;
-      fetch(url)
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({ response, isLoading: false });
-          return response;
-        })
-        .catch(() => {
-          this.setState({ response: 'none', isLoading: false });
-        });
-    };
-    fetchData();
+    this.fetchData();
   }
 
   render() {

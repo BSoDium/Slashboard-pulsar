@@ -1,5 +1,9 @@
-.btnPrimary,
-.btnSecondary {
+.btn-primary,
+.btn-secondary {
+  &:hover {
+    transition: linear 0.2s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   height: fit-content;
   width: fit-content;
   padding: 10px 20px 10px 20px;
@@ -10,32 +14,28 @@
   cursor: pointer;
 }
 
-.btnPrimary:hover,
-.btnSecondary:hover {
-  transition: linear 0.2s;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.btnPrimary {
+.btn-primary {
+  &:hover {
+    background-color: #042db3;
+  }
   background-color: #1441d3;
   color: #fff;
 }
 
-.btnPrimary:hover {
-  background-color: #042db3;
-}
-
-.btnSecondary {
+.btn-secondary {
+  &:hover {
+    background-color: #d4d4d4;
+    color: #000;
+  }
   background-color: rgb(238, 238, 238);
   color: #2a3147;
 }
 
-.btnSecondary:hover {
-  background-color: #d4d4d4;
-  color: #000;
-}
-
-.btnFlat {
+.btn-flat {
+  &:hover {
+    background-color: #d4d4d4;
+    color: #000;
+  }
   display: inline-block;
   vertical-align: middle;
   padding: 10px;
@@ -49,12 +49,7 @@
   justify-content: center;
 }
 
-.btnFlat:hover {
-  background-color: #d4d4d4;
-  color: #000;
-}
-
-.btnDock {
+.btn-dock {
   display: inline-block;
   vertical-align: middle;
   padding: 10px;

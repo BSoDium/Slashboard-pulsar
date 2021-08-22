@@ -3,12 +3,10 @@ import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from 'renderer/containers/Login';
 import HomePage from './containers/HomePage';
 
-import 'renderer/App.global.css'
+import 'renderer/App.global.scss'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props { }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface State { }
 
 class App extends React.Component<Props, State> {
