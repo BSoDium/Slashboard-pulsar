@@ -1,14 +1,17 @@
+.sidebar-button-enabled,
 .sidebar-button {
   padding: 10px;
   border-radius: 3px;
   margin-top: 2px;
   margin-bottom: 2px;
-  cursor: pointer;
 }
 
-.sidebar-button:hover {
-  background-color: rgba(53, 68, 104, 0.397);
-  transition: background-color 0.2s;
+.sidebar-button-enabled {
+  &:hover {
+    background-color: rgba(53, 68, 104, 0.397);
+    transition: background-color 0.2s;
+  }
+  cursor: pointer;
 }
 
 .sidebar-button-text {
@@ -22,21 +25,20 @@
   border-radius: 4px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
+  margin: 10px 0px 20px 0px;
   padding: 5px;
   align-items: center;
 }
 
 .sidebar-control-button {
+  &:hover {
+    background-color: rgba(53, 68, 104, 0.397);
+    transition: background-color 0.2s;
+  }
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
   color: #fff;
   padding: 10px;
   border-radius: 4px;
   border: none;
-}
-
-.sidebar-control-button:hover {
-  background-color: rgba(53, 68, 104, 0.397);
-  transition: background-color 0.2s;
 }

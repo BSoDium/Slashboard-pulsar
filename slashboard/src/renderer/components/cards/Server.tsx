@@ -1,11 +1,20 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartPie } from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types';
 
 import Loading from 'renderer/components/Loading';
 import serverIcon from 'renderer/assets/icons/server.svg';
 import pcIcon from 'renderer/assets/icons/pc.svg';
 import phoneIcon from 'renderer/assets/icons/smartphone.svg';
 
+
+const statusColorMap: { [key: string]: string } = {
+  "active": "#00ff88",
+  "access denied": "rgb(226, 178, 19)",
+  "down": "#ff001e"
+}
 
 interface iconDictionary {
   [key: string]: string;
@@ -19,6 +28,9 @@ const icons: iconDictionary = {
 
 interface Props {
   data: any;
+  match: any;
+  location: any;
+  history: any;
 }
 
 interface State {
@@ -27,6 +39,12 @@ interface State {
 }
 
 class Server extends React.Component<Props, State> {
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -57,9 +75,11 @@ class Server extends React.Component<Props, State> {
 
   render() {
     const { isLoading, response } = this.state;
-    const { data } = this.props;
+    const { data, history } = this.props;
     return (
-      <div className="server-wrapper">
+      <div className="server-wrapper" onClick={() => {
+        history.push(`/servers/${data.ip}-${data.port}`)
+      }}>
         <img
           src={icons[data.type]}
           className="server-icon"
@@ -94,18 +114,24 @@ class Server extends React.Component<Props, State> {
               // fetch succeeded
               <div className="tag">
                 <tr style={{ color: "#5493ff", fontWeight: "bold", textTransform: "uppercase" }}>{response.data.name}</tr>
-                <tr>status : <span style={{ color: (response.data.status === "active" ? "#00ff88" : "#ff001e"), fontWeight: "bold" }}>{response.data.status}</span></tr>
+                <tr>status : <span style={{ color: statusColorMap[response.data.status], fontWeight: "bold" }}>{response.data.status}</span></tr>
                 <tr>
-                  operating system : {response.data.os.type}&nbsp;
-                  {response.data.os.architecture}&nbsp;build&nbsp;
-                  {response.data.os.release}
+                  operating system :&nbsp;
+                  {response.data.os ?
+                    <>{response.data.os.type}&nbsp;
+                      {response.data.os.architecture}&nbsp;build&nbsp;
+                      {response.data.os.release}</> :
+                    "unknown"
+                  }
                 </tr>
               </div>
             )}
+        </div>
+        <div className="server-actions">
         </div>
       </div>
     );
   }
 }
 
-export default Server;
+export default withRouter(Server);

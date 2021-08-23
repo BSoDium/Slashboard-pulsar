@@ -3,12 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Dashboard from 'renderer/containers/Dashboard'
-
-interface HomePageState {
-}
-
-class HomePage extends React.Component<any, HomePageState> {
+class HomePage extends React.Component<any, any> {
     static propTypes = {
         match: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
@@ -26,7 +21,7 @@ class HomePage extends React.Component<any, HomePageState> {
         const authSuccess = true;
 
         return (authSuccess ?
-            <Dashboard />
+            <Redirect to="dashboard" />
             :
             <Redirect to="login" />
         );

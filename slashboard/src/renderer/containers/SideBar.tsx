@@ -20,22 +20,32 @@ interface buttonProps {
 	isOpen: boolean;
 	tab: JSX.Element;
 	setTab: (tab: JSX.Element) => void;
+	disabled: boolean;
 }
 
-const SideBarButton = ({ icon, text, isOpen, tab, setTab }: buttonProps) => {
+const SideBarButton = ({ icon, text, isOpen, tab, setTab, disabled }: buttonProps) => {
+	const statusColor = disabled ? "rgba(124, 124, 124, 0.548)" : "white"
 	return (
-		<div className="sidebar-button" style={tab.type === tabDictionary[text].type ?
-			{ backgroundColor: 'rgba(88, 95, 110, 0.397)' } :
-			undefined}
-			onClick={() => { setTab(tabDictionary[text]) }}
+		<div className={`sidebar-button${disabled ? "" : "-enabled"}`}
+			style={tab.type === tabDictionary[text].type ? {
+				backgroundColor: 'rgba(88, 95, 110, 0.397)'
+			} : {}}
+			onClick={() => {
+				if (!disabled) {
+					setTab(tabDictionary[text])
+				}
+			}}
 		>
 			<FontAwesomeIcon icon={icon} size="lg" className="sidebar-button-icon" style={isOpen ?
 				{ display: "inline-block", verticalAlign: "middle" } :
 				{ display: "block", marginLeft: "auto", marginRight: "auto" }
 			}
+				color={statusColor}
 			/>
 			{isOpen ?
-				<span className="sidebar-button-text">{text}</span> :
+				<span className="sidebar-button-text"
+					style={{ color: statusColor }}
+				>{text}</span> :
 				null
 			}
 		</div>
@@ -102,9 +112,9 @@ class SideBar extends React.Component<Props, State> {
 						</button>
 					}
 				</div >
-				<SideBarButton icon={faClipboard} text="Servers" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} />
-				<SideBarButton icon={faPowerOff} text="IOT" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} />
-				<SideBarButton icon={faClipboardList} text="Logs" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} />
+				<SideBarButton icon={faClipboard} text="Servers" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} disabled={false} />
+				<SideBarButton icon={faPowerOff} text="IOT" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} disabled={true} />
+				<SideBarButton icon={faClipboardList} text="Logs" isOpen={isSideBarOpen} tab={tab} setTab={this.props.setTab} disabled={false} />
 			</div >
 		);
 	}

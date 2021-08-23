@@ -3,12 +3,25 @@
   height: 100vh;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.titlebar-wrapper {
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  background-color: #061a2b;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .dashboard-wrapper {
   background: linear-gradient(to right top, #312b3a, #043e46);
   width: 100%;
-  height: 98%;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -18,7 +31,7 @@
 .login-wrapper {
   background: linear-gradient(to right top, #e29829, #0fc8e0);
   width: 100%;
-  height: 98%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +56,9 @@
 }
 
 .server-wrapper {
+  &:hover {
+    background: #061a2b98;
+  }
   background: #061a2b65;
   border-radius: 10px;
   width: fit-content;
@@ -50,6 +66,7 @@
   margin-top: 20px;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .sidebar-wrapper {
@@ -59,15 +76,4 @@
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
-}
-
-.titlebar-wrapper {
-  box-sizing: border-box;
-  height: 2%;
-  background-color: #272d42;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  -webkit-app-region: drag;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWindowMaximize, faWindowMinimize, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 interface Props { }
@@ -24,14 +24,21 @@ class TitleBar extends React.Component<Props, State> {
     return (
       <div className="titlebar-wrapper" style={{ display: fullscreen ? 'none' : 'auto' }}>
         <div className="titlebar-text">
-          titlebar
+          Slashboard
         </div>
+        <div className="titlebar-grabber"></div>
         <div className="titlebar-controls">
-          <FontAwesomeIcon icon={faWindowMinimize} />
-          <FontAwesomeIcon icon={faWindowMaximize} />
-          <FontAwesomeIcon icon={faWindowClose} />
+          <button type="button" className="titlebar-control-button">
+            <FontAwesomeIcon icon={faCircle} color="rgb(10, 163, 22)" />
+          </button>
+          <button type="button" className="titlebar-control-button">
+            <FontAwesomeIcon icon={faCircle} color="rgb(226, 178, 19)" />
+          </button>
+          <button type="button" className="titlebar-control-button">
+            <FontAwesomeIcon icon={faCircle} color="red" />
+          </button>
         </div>
-      </div>
+      </div >
     );
   }
 }
