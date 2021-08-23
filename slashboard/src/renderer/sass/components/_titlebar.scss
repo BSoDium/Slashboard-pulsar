@@ -1,0 +1,30 @@
+.titlebar-text {
+  color: rgba(255, 255, 255, 0.623);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  width: 100px;
+  padding: 3px;
+}
+
+.titlebar-grabber {
+  -webkit-app-region: drag;
+  width: 100%;
+}
+
+.titlebar-controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.titlebar-control-button {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.493);
+    transition: background-color 0.2s;
+  }
+  background-color: rgba(255, 255, 255, 0);
+  margin: 2px;
+  width: max-content;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

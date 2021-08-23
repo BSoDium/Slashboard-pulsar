@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "conventionalCommits.scopes": ["frontend", "backend"],
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": true,
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run Slashboard",
+        "type": "pwa-node",
+        "request": "launch",
+        "cwd": "${workspaceRoot}/slashboard",
+        "args": ["start"],
+        "runtimeExecutable": "yarn",
+        "resolveSourceMapLocations": [
+          "${workspaceFolder}/",
+          "!/node_modules/**"
+        ]
+      },
+      {
+        "name": "Run nodejs server",
+        "type": "pwa-node",
+        "request": "launch",
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceRoot}/peakon",
+        "program": "${workspaceRoot}/peakon/index.js",
+        "__workspaceFolder": "${workspaceRoot}/peakon"
+      }
+    ]
+  }
+}

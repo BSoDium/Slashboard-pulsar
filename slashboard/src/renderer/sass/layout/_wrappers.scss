@@ -1,0 +1,79 @@
+.window-wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.titlebar-wrapper {
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  background-color: #061a2b;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.dashboard-wrapper {
+  background: linear-gradient(to right top, #312b3a, #043e46);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  background: linear-gradient(to right top, #e29829, #0fc8e0);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.main-card-wrapper {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.list-wrapper {
+  background: #061a2b65;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.server-wrapper {
+  &:hover {
+    background: #061a2b98;
+  }
+  background: #061a2b65;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.sidebar-wrapper {
+  background: #061a2bb9;
+  padding: 5px;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+}
