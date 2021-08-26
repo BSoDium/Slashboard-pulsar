@@ -1,0 +1,20 @@
+.layout-btn-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-band {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-left: 74%;
+  padding-top: 1%;
+  padding-right: 2%;
+}

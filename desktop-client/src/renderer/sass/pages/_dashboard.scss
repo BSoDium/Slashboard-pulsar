@@ -1,0 +1,19 @@
+.list-titlebar-transparent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 3%;
+}
+
+.list-spacer {
+  box-sizing: border-box;
+  height: 3%;
+}
+
+.list-content {
+  box-sizing: border-box;
+  height: 94%;
+  overflow-y: auto;
+}

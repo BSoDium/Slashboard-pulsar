@@ -1,0 +1,15 @@
+.server-stats-titlebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 5%;
+}
+
+.server-stats-content {
+  box-sizing: border-box;
+  height: 93%;
+  margin-top: 20px;
+  overflow-y: auto;
+}
