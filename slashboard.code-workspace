@@ -5,7 +5,7 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["frontend", "backend"],
+    "conventionalCommits.scopes": ["desktop-client", "pulsar"],
     "git.ignoreLimitWarning": true,
     "editor.formatOnSave": true,
   },
@@ -13,10 +13,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Run Slashboard",
+        "name": "Run Desktop client",
         "type": "pwa-node",
         "request": "launch",
-        "cwd": "${workspaceRoot}/slashboard",
+        "cwd": "${workspaceRoot}/desktop-client",
         "args": ["start"],
         "runtimeExecutable": "yarn",
         "resolveSourceMapLocations": [
@@ -25,13 +25,13 @@
         ]
       },
       {
-        "name": "Run nodejs server",
+        "name": "Run Pulsar",
         "type": "pwa-node",
         "request": "launch",
         "skipFiles": ["<node_internals>/**"],
-        "cwd": "${workspaceRoot}/peakon",
-        "program": "${workspaceRoot}/peakon/index.js",
-        "__workspaceFolder": "${workspaceRoot}/peakon"
+        "cwd": "${workspaceRoot}/pulsar",
+        "program": "${workspaceRoot}/pulsar/index.js",
+        "__workspaceFolder": "${workspaceRoot}/pulsar"
       }
     ]
   }
