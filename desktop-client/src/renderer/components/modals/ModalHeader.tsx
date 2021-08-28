@@ -12,7 +12,7 @@ class ModalHeader extends React.Component<ModalHeaderProps, ModalHeaderState> {
 	static defaultProps = {
 		shadow: false
 	}
-	constructor(props: ModalHeaderProps | Readonly<ModalHeaderProps>) {
+	constructor(props: ModalHeaderProps) {
 		super(props);
 	}
 

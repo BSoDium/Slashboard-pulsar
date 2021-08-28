@@ -3,20 +3,20 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import SideBar from 'renderer/containers/SideBar';
+import ModalHandler from 'renderer/components/modals/ModalHandler';
 
 interface Props {
-  child: JSX.Element;
-  match: any,
-  location: any,
-  history: any,
+  children: JSX.Element;
+  match: any;
+  location: any;
+  history: any;
 }
-
 
 class Dashboard extends React.Component<Props, {}> {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
   constructor(props: Props) {
@@ -27,11 +27,13 @@ class Dashboard extends React.Component<Props, {}> {
     // debug
     // console.log(this.props.location.pathname)
 
-    const { child } = this.props
+    const { children } = this.props;
     return (
       <div className="dashboard-wrapper">
-        <SideBar tab={child} />
-        {child}
+        <div className="sidebar-spacer" />
+        {children}
+        <SideBar tab={children} />
+        <ModalHandler />
       </div>
     );
   }

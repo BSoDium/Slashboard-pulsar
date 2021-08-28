@@ -10,7 +10,7 @@
 
 .titlebar-wrapper {
   box-sizing: border-box;
-  height: fit-content;
+  height: 25px;
   width: 100%;
   background-color: #061a2b;
   display: flex;
@@ -54,6 +54,9 @@
   color: #fff;
   box-sizing: border-box;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .server-wrapper {
@@ -71,12 +74,15 @@
 }
 
 .sidebar-wrapper {
-  background: #061a2bb9;
+  background: #061a2b;
   padding: 5px;
+  height: calc(100% - 24px);
   color: #fff;
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
+  position: absolute;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .error-wrapper {
@@ -93,10 +99,18 @@
   position: relative;
   background-color: #061a2b;
   border-radius: 10px;
-  height: 400px;
-  width: 700px;
-  margin: -200px 0 0 -350px;
-  top: 50%;
-  left: 50%;
   overflow: auto;
+  height: fit-content;
+  width: fit-content;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.server-stats-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }

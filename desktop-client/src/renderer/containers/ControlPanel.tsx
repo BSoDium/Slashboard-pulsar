@@ -3,12 +3,11 @@ import React from 'react';
 import ServerList from 'renderer/containers/ServerList';
 import { CompactState } from 'renderer/App';
 
-
 interface Props {
   offline: CompactState;
 }
 
-interface State { }
+interface State {}
 
 class ControlPanel extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -21,7 +20,7 @@ class ControlPanel extends React.Component<Props, State> {
     return (
       <div className="body-wrapper">
         <ServerList offline={offline} />
-        {/* there should also be a DeviceList element in future updates */}
+        {/* there should also be a DeviceList element in a future update */}
       </div>
     );
   }

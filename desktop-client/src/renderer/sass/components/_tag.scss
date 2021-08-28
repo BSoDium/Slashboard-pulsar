@@ -9,6 +9,9 @@
   color: rgb(0, 0, 0);
   border: 1px solid #333333;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .t-dark {

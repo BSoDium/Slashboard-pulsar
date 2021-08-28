@@ -12,7 +12,7 @@ class ModalFooter extends React.Component<ModalFooterProps, ModalFooterState> {
 	static defaultProps = {
 		shadow: false
 	}
-	constructor(props: ModalFooterProps | Readonly<ModalFooterProps>) {
+	constructor(props: ModalFooterProps) {
 		super(props);
 	}
 

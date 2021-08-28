@@ -19,5 +19,14 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
     },
+    minimize() {
+      ipcRenderer.send('minimize');
+    },
+    maximize() {
+      ipcRenderer.send('maximize');
+    },
+    close() {
+      ipcRenderer.send('close');
+    }
   },
 });

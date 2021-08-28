@@ -9,19 +9,18 @@ interface Props {
 interface State { }
 
 class Loading extends React.Component<Props, State> {
-  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     text: '',
     height: '100%',
   };
 
-  constructor(props: Props | Readonly<Props>) {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    const { text, height } = this.props;
+    const { text, height } = this.props
     return (
       <div className="Loader-container" style={{ height }}>
         <div className="sk-cube-grid">

@@ -5,7 +5,7 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["frontend", "backend"],
+    "conventionalCommits.scopes": ["desktop-client", "pulsar"],
     "git.ignoreLimitWarning": true,
     "editor.formatOnSave": true,
   },

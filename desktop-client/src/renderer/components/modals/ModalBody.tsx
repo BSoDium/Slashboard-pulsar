@@ -12,7 +12,7 @@ class ModalBody extends React.Component<ModalBodyProps, ModalBodyState> {
 	static defaultProps = {
 		shadow: false
 	}
-	constructor(props: ModalBodyProps | Readonly<ModalBodyProps>) {
+	constructor(props: ModalBodyProps) {
 		super(props);
 	}
 

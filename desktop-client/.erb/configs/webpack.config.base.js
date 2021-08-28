@@ -9,7 +9,7 @@ import { dependencies as externals } from '../../build/app/package.json';
 
 export default {
   externals: [...Object.keys(externals || {})],
-
+  
   module: {
     rules: [
       {
