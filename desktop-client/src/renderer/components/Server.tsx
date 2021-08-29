@@ -2,10 +2,17 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Loading from 'renderer/components/Loading';
+import LoadingSkeleton from 'renderer/components/loading/LoadingSkeleton';
 import serverIcon from 'renderer/assets/server.svg';
 import pcIcon from 'renderer/assets/pc.svg';
 import phoneIcon from 'renderer/assets/smartphone.svg';
+import ModalHandler, {
+  HandlerToken,
+} from 'renderer/components/modals/ModalHandler';
+import DelDeviceModal from 'renderer/components/modals/DelDeviceModal';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPen, faSync } from '@fortawesome/free-solid-svg-icons';
 
 const statusColorMap: { [key: string]: string } = {
   active: '#00ff88',
@@ -25,6 +32,8 @@ const icons: iconDictionary = {
 
 interface Props {
   data: any;
+  id: string;
+  listRefresh: () => void;
   match: any;
   location: any;
   history: any;
@@ -33,9 +42,12 @@ interface Props {
 interface State {
   isLoading: boolean;
   response: any;
+  showMenu: boolean;
 }
 
 class Server extends React.Component<Props, State> {
+  delModal: HandlerToken | undefined;
+
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -47,14 +59,20 @@ class Server extends React.Component<Props, State> {
     this.state = {
       isLoading: true,
       response: null,
+      showMenu: false,
     };
 
     this.fetchData = this.fetchData.bind(this);
   }
 
+  getId(): string {
+    return this.props.id;
+  }
+
   fetchData() {
     const { data } = this.props;
     const url = `http://${data.ip}:${data.port}/${data.auth}/status-compact`;
+    this.setState({ isLoading: true });
     fetch(url)
       .then((response) => response.json())
       .then((response) => {
@@ -67,35 +85,67 @@ class Server extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    this.delModal = ModalHandler.push(DelDeviceModal, this);
     this.fetchData();
   }
 
   render() {
-    const { isLoading, response } = this.state;
+    const { isLoading, response, showMenu } = this.state;
     const { data, history } = this.props;
     return (
       <div
         className="server-wrapper"
-        onClick={() => {
-          history.push(
-            `/dashboard/servers/${data.ip}-${data.port}-${data.auth}`
-          );
+        onMouseEnter={() => {
+          this.setState({ showMenu: true });
+        }}
+        onMouseLeave={() => {
+          this.setState({ showMenu: false });
         }}
       >
         <img
           src={icons[data.type]}
           className="server-icon"
           alt="serverIcon"
-          style={{ height: '100px', marginRight: '30px' }}
+          onClick={() => {
+            history.push(
+              `/dashboard/servers/${data.ip}-${data.port}-${data.auth}`
+            );
+          }}
         />
         <div className="server-details">
-          <h2>
-            <span style={{ color: '#00ffb3' }}>{data.ip}</span>:
-            <span style={{ color: '#00eaff' }}>{data.port}</span>
-          </h2>
+          <div className="server-details-header">
+            <h2>
+              <span style={{ color: '#00ffb3' }}>{data.ip}</span>:
+              <span style={{ color: '#00eaff' }}>{data.port}</span>
+            </h2>
+            {showMenu && (
+              <div className="server-menu">
+                <button
+                  type="button"
+                  className="btn-empty"
+                  onClick={this.fetchData}
+                >
+                  <FontAwesomeIcon icon={faSync} />
+                </button>
+                <button type="button" className="btn-empty">
+                  <FontAwesomeIcon icon={faPen} />
+                </button>
+                <button
+                  type="button"
+                  className="btn-empty"
+                  onClick={() => {
+                    ModalHandler.enable(this.delModal!);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
+            )}
+          </div>
+
           {isLoading ? (
             // fetch is in progress
-            <Loading />
+            <LoadingSkeleton />
           ) : // fetch is complete
           response === 'none' ? (
             // fetch failed
@@ -121,7 +171,7 @@ class Server extends React.Component<Props, State> {
                   An inactive server might be down for maintenance or under
                   heavy load.
                   <br />
-                  If this problem persists, check your node js configuration.
+                  If this problem persists, check your Pulsar configuration.
                 </div>
               </div>
             </>
@@ -157,16 +207,19 @@ class Server extends React.Component<Props, State> {
                     {response.data.os.release}
                   </>
                 ) : (
-                  'unknown'
+                  'unable to retrieve'
                 )}
               </div>
             </div>
           )}
         </div>
-        <div className="server-actions"></div>
+        <div className="anchor">
+          <div className="server-actions"></div>
+        </div>
       </div>
     );
   }
 }
 
 export default withRouter(Server);
+export { Server };

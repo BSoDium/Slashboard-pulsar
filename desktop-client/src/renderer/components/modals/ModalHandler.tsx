@@ -3,6 +3,7 @@ import React from 'react';
 interface HandlerToken {
   index: number;
   component: React.ComponentType<ModalProps>;
+  emitter: React.Component;
 }
 
 interface ModalProps {
@@ -12,6 +13,7 @@ interface ModalProps {
 interface Modal {
   status: boolean;
   component: React.ComponentType<ModalProps>;
+  emitter: React.Component;
 }
 
 interface Props {
@@ -22,10 +24,20 @@ interface State {
   children: Array<Modal>;
 }
 
+/**
+ * A handy component which handles modals and makes sure they
+ * appear on top of everything else.
+ */
 class ModalHandler extends React.Component<Props, State> {
   static instance: ModalHandler | undefined;
 
-  constructor(props: any) {
+  /**
+   * Creates a modal handler.
+   * Warning : by default, only one instance of this class is allowed.
+   * To overwrite previously created instances, set the `allowMultiInstance` prop to true.
+   * @param props
+   */
+  constructor(props: Props) {
     super(props);
     const { allowMultiInstance } = this.props;
     if (ModalHandler.instance && !allowMultiInstance) {
@@ -40,7 +52,15 @@ class ModalHandler extends React.Component<Props, State> {
     }
   }
 
-  static push(modal: React.ComponentType<ModalProps>): HandlerToken {
+  /**
+   * Declares a new modal to the ModalHandler.
+   * @param modal the modal which will be added
+   * @returns the generated token - it must be saved in order to open/close the modal
+   */
+  static push(
+    modal: React.ComponentType<ModalProps>,
+    emitter: React.Component
+  ): HandlerToken {
     if (!ModalHandler.instance) {
       throw new Error(
         "MissingInstanciation : Attempting to call method 'push' while ModalHandler has not been instanciated yet."
@@ -50,11 +70,13 @@ class ModalHandler extends React.Component<Props, State> {
     children.push({
       status: false,
       component: modal,
+      emitter,
     });
     ModalHandler.instance.setState({ children });
     return {
       index: children.length - 1,
       component: modal,
+      emitter,
     };
   }
 
@@ -74,10 +96,18 @@ class ModalHandler extends React.Component<Props, State> {
     ModalHandler.instance.setState({ children });
   }
 
+  /**
+   * Enables/Opens the modal.
+   * @param token the token returned by the push() method call.
+   */
   static enable(token: HandlerToken) {
     this.set(token, true);
   }
 
+  /**
+   * Disables/Closes the modal.
+   * @param token the token returned by the push() method call.
+   */
   static disable(token: HandlerToken) {
     this.set(token, false);
   }
@@ -95,7 +125,11 @@ class ModalHandler extends React.Component<Props, State> {
             child.status && (
               <div className="modal-handler-child" key={`modal-${i}`}>
                 <child.component
-                  token={{ index: i, component: child.component }}
+                  token={{
+                    index: i,
+                    component: child.component,
+                    emitter: child.emitter,
+                  }}
                 />
               </div>
             )

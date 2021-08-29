@@ -1,30 +1,28 @@
 import React from 'react';
 
-
 interface ModalFooterProps {
-	children?: JSX.Element
+  children?: JSX.Element | JSX.Element[] | string;
+  style?: React.CSSProperties;
 }
 
-interface ModalFooterState {
-}
+interface ModalFooterState {}
 
 class ModalFooter extends React.Component<ModalFooterProps, ModalFooterState> {
-	static defaultProps = {
-		shadow: false
-	}
-	constructor(props: ModalFooterProps) {
-		super(props);
-	}
+  static defaultProps = {
+    shadow: false,
+  };
+  constructor(props: ModalFooterProps) {
+    super(props);
+  }
 
-	render() {
-		const { children } = this.props
-		return (
-			<div className="modal-footer" style={{
-			}}>
-				{children}
-			</div>
-		);
-	}
+  render() {
+    const { children, style } = this.props;
+    return (
+      <div className="modal-footer" style={style}>
+        {children}
+      </div>
+    );
+  }
 }
 
 export default ModalFooter;

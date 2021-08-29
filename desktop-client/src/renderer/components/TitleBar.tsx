@@ -31,7 +31,7 @@ class TitleBar extends React.Component<Props, State> {
             type="button"
             className="titlebar-control-button"
             onClick={() => {
-              window.electron.ipcRenderer.minimize();
+              window.electron.ipcRenderer.currentWindow.minimize();
             }}
           >
             <FontAwesomeIcon icon={faCircle} color="rgb(10, 163, 22)" />
@@ -40,7 +40,7 @@ class TitleBar extends React.Component<Props, State> {
             type="button"
             className="titlebar-control-button"
             onClick={() => {
-              window.electron.ipcRenderer.maximize();
+              window.electron.ipcRenderer.currentWindow.maximize();
             }}
           >
             <FontAwesomeIcon icon={faCircle} color="rgb(226, 178, 19)" />
@@ -49,7 +49,7 @@ class TitleBar extends React.Component<Props, State> {
             type="button"
             className="titlebar-control-button"
             onClick={() => {
-              window.electron.ipcRenderer.close();
+              window.electron.ipcRenderer.currentWindow.close();
             }}
           >
             <FontAwesomeIcon icon={faCircle} color="red" />

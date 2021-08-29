@@ -9,9 +9,9 @@ import {
   faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Loading from 'renderer/components/Loading';
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
+import LoadingSpinner from '../loading/LoadingSpinner';
 
 interface State {
   isLoading: boolean;
@@ -175,7 +175,7 @@ class ServerStats extends React.Component<any, State> {
         </div>
       );
     } else {
-      content = <Loading />;
+      content = <LoadingSpinner />;
     }
     return (
       <div className="body-wrapper">

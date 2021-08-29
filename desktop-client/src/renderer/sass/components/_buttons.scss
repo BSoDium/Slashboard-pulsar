@@ -66,6 +66,26 @@
   justify-content: center;
 }
 
+.btn-empty {
+  &:hover {
+    background-color: #ffffff11;
+    transition: 0.2s linear;
+  }
+  height: fit-content;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 .btn-dock {
   display: inline-block;
   vertical-align: middle;

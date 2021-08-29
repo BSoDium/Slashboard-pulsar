@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import Server from 'renderer/components/Server';
-import AddModal from 'renderer/components/modals/AddModal';
+import AddDeviceModal from 'renderer/components/modals/AddDeviceModal';
 import {
   ModalHandler,
   HandlerToken,
@@ -39,60 +39,28 @@ class ServerList extends React.Component<Props, State> {
       lastUpdated: new Date(),
       timeSinceLastUpdate: 'now',
     };
+
+    this.fetch = this.fetch.bind(this);
   }
 
   componentDidMount() {
-    // atm we're hardcoding the server list
-    this.setState({
-      servers: [
-        {
-          ip: '127.0.0.1',
-          port: '5000',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'server',
-        },
-        {
-          ip: '192.168.1.54',
-          port: '5000',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'pc',
-        },
-        {
-          ip: '1.1.1.1',
-          port: '7023',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'pc',
-        },
-        {
-          ip: '93.5.0.201',
-          port: '4032',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'smartphone',
-        },
-        {
-          ip: '22.3.0.103',
-          port: '4090',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'smartphone',
-        },
-        {
-          ip: '90.23.1.29',
-          port: '4052',
-          auth: 'ljepm89w3a9zeqfbrjsfhz1olt7vta47bwohedxr789wiuhiyfew3jz45pi4b3b8bjkarank8qdjh8dmawc0bfe35bh9k7x65erlfgjuavq1vvzmvuljumbv6itik5az2vuzth22u8d7so3fqy9bv95llv6pngs0uivcqy1zcvx5fecvgx8y8fzv8qompd3qnrhht96y',
-          type: 'smartphone',
-        },
-      ],
-    });
+    // push modal to ModalHandler
+    this.addModal = ModalHandler.push(AddDeviceModal, this);
 
-    // update "Last fetched :" text every 5000 ms
-    this.interval = setInterval(() => {
+    // fetch server list on component mount
+    this.fetch();
+    // update "Last fetched :" text and server list every 5000 ms
+    this.interval = setInterval(async () => {
+      this.fetch();
       this.setState({
         timeSinceLastUpdate: moment(this.state.lastUpdated).fromNow(),
       });
     }, 5000);
+  }
 
-    // push modal to ModalHandler
-    this.addModal = ModalHandler.push(AddModal);
+  async fetch() {
+    const servers = await window.electron.ipcRenderer.storage.getServers();
+    this.setState({ servers });
   }
 
   componentWillUnmount() {
@@ -150,15 +118,14 @@ class ServerList extends React.Component<Props, State> {
               </div>
             </div>
             <div className="list-content">
-              {servers.map((serverData) => {
+              {Object.values(servers).map((serverData, i) => {
+                const id = Object.keys(servers)[i];
                 return (
                   <Server
-                    // TODO: key assignement needs some rework
-                    key={
-                      parseInt(serverData.ip.split('.').join(''), 10) +
-                      lastUpdated.getTime()
-                    }
+                    key={`${id}-${lastUpdated.getTime()}`}
                     data={serverData}
+                    id={id}
+                    listRefresh={this.fetch}
                   />
                 );
               })}

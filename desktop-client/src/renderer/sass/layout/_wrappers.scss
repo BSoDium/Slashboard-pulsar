@@ -60,17 +60,14 @@
 }
 
 .server-wrapper {
-  &:hover {
-    background: #061a2b98;
-  }
   background: #061a2b65;
   border-radius: 10px;
+  box-sizing: border-box;
   width: fit-content;
   padding: 20px;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  cursor: pointer;
 }
 
 .sidebar-wrapper {
@@ -105,6 +102,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .server-stats-wrapper {
