@@ -85,18 +85,17 @@
 .msg-wrapper {
   text-align: center;
   position: relative;
-  height: 600px;
+  height: fit-content;
   width: 400px;
-  margin: -300px 0 0 -200px;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-wrapper {
   position: relative;
   background-color: #061a2b;
   border-radius: 10px;
-  overflow: auto;
   height: fit-content;
   width: fit-content;
   left: 50%;

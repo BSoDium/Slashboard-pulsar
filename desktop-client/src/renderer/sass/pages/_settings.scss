@@ -8,6 +8,18 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.setting-text {
+  color: #fff;
+  width: 400px;
+}
+
+.setting-description {
+  font-size: 0.8em;
+  color: rgb(150, 150, 150);
+  width: 350px;
 }
 
 .switch {
@@ -31,8 +43,8 @@
   right: 0;
   bottom: 0;
   background-color: rgb(69, 70, 82);
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s ease-in-out;
 }
 
 .slider:before {
@@ -43,8 +55,8 @@
   left: 4px;
   bottom: 3px;
   background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s ease-in-out;
 }
 
 input:checked + .slider {

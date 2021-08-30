@@ -7,6 +7,7 @@ import {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 import InfoModal from 'renderer/components/modals/InfoModal';
+import SettingsModal from 'renderer/components/settings/SettingsModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -88,6 +89,7 @@ interface State {
 
 class SideBar extends React.Component<Props, State> {
   infoModal: HandlerToken | undefined;
+  settingsModal: HandlerToken | undefined;
 
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -105,6 +107,7 @@ class SideBar extends React.Component<Props, State> {
   componentDidMount() {
     // push modal to ModalHandler
     this.infoModal = ModalHandler.push(InfoModal, this);
+    this.settingsModal = ModalHandler.push(SettingsModal, this);
   }
 
   render() {
@@ -134,11 +137,15 @@ class SideBar extends React.Component<Props, State> {
         >
           {isSideBarOpen ? (
             <>
-              <Link to="/settings">
-                <button type="button" className="sidebar-control-button">
-                  <FontAwesomeIcon icon={faCog} size="lg" />
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="sidebar-control-button"
+                onClick={() => {
+                  ModalHandler.enable(this.settingsModal!);
+                }}
+              >
+                <FontAwesomeIcon icon={faCog} size="lg" />
+              </button>
               <button
                 type="button"
                 className="sidebar-control-button"
@@ -209,3 +216,4 @@ class SideBar extends React.Component<Props, State> {
 }
 
 export default withRouter(SideBar);
+export { SideBar };

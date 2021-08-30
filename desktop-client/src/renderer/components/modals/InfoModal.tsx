@@ -8,6 +8,9 @@ import ModalHandler, {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 
+import logo from 'renderer/assets/Slashboard.svg';
+import changelog from 'changelog.js';
+
 interface Props {
   token: HandlerToken;
 }
@@ -33,7 +36,7 @@ class InfoModal extends React.Component<Props, State> {
     const { token } = this.props;
     const { appVersion } = this.state;
     return (
-      <Modal height="fit-content" width="500px">
+      <Modal height="fit-content" width="550px">
         <ModalHeader
           style={{ padding: '15px 0px 15px 20px', background: '#0e3455' }}
         >
@@ -48,21 +51,34 @@ class InfoModal extends React.Component<Props, State> {
           }}
         >
           <div className="spacer">
-            {/* Slashboard logo should be here */}
-            <h3>Slashboard {appVersion} pre-release - Do not distribute</h3>
-            <p>
-              Developer : Philippe Jerzy (l3alr0g)
-              <br />
-              Contact :{' '}
-              <a href="mailto:negreljerzy.philippe@gmail.com" target="_blank">
-                negreljerzy.philippe@gmail.com
-              </a>
-              <br />
-              Bug reports :{' '}
-              <a href="https://github.com/l3alr0g/Slashboard/issues">
-                Github issues
-              </a>
-            </p>
+            <div className="title-row">
+              <img
+                src={logo}
+                alt="Slashboard-logo"
+                style={{ width: '200px', marginRight: '20px' }}
+              />
+              <div>
+                <h2>Slashboard {appVersion}</h2>
+                <h3>pre-release</h3>
+                <div className="tag t-secondary">
+                  <span className="h-bold">Changelog :</span>
+                  {changelog}
+                </div>
+              </div>
+            </div>
+            <div className="spacer" style={{ marginTop: '20px' }}>
+              <div className="tag t-dark">
+                <div>
+                  <span className="h-bold">Developer</span> : l3alr0g (Philippe
+                  Négrel-Jerzy)
+                  <br />
+                  <span className="h-bold">Contact</span> :
+                  negreljerzy.philippe@gmail.com
+                  <br />
+                  Bug reports via Github only
+                </div>
+              </div>
+            </div>
           </div>
         </ModalBody>
         <ModalFooter>

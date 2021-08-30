@@ -11,6 +11,8 @@ import ModalHandler, {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import ServerList from 'renderer/containers/ServerList';
+import SelectType from 'renderer/components/modals/SelectType';
+import { ActionMeta, ValueType } from 'react-select';
 
 interface Props {
   token: HandlerToken;
@@ -25,6 +27,12 @@ interface State {
 }
 
 class AddDeviceModal extends React.Component<Props, State> {
+  deviceTypeOptions = [
+    { value: 'server', label: 'Server' },
+    { value: 'pc', label: 'PC' },
+    { value: 'smartphone', label: 'Smartphone' },
+  ];
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -32,10 +40,11 @@ class AddDeviceModal extends React.Component<Props, State> {
       ip: '',
       port: '',
       auth: '',
-      type: 'server', // default select value
+      type: Object.keys(this.deviceTypeOptions)[0], // default select value
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleInputChange(
@@ -50,6 +59,15 @@ class AddDeviceModal extends React.Component<Props, State> {
       [name]: value,
     } as unknown as Pick<State, keyof State>);
   }
+
+  handleSelectChange = (
+    value: ValueType<any, any>,
+    action: ActionMeta<any>
+  ) => {
+    this.setState({
+      [action.name as string]: value.value,
+    } as unknown as Pick<State, keyof State>);
+  };
 
   render() {
     const { token } = this.props;
@@ -113,6 +131,7 @@ class AddDeviceModal extends React.Component<Props, State> {
             className="tag t-dark"
             style={{
               display: showHelp ? 'block' : 'none',
+              transition: 'all 0.3s ease-in-out',
             }}
           >
             <div className="h-bold h-primary">Where do I find this key ?</div>
@@ -120,26 +139,16 @@ class AddDeviceModal extends React.Component<Props, State> {
               Pulsar attributes a unique key to your server when running the
               configuration script for the first time. If you did not write it
               down, you can still get it back, but this requires some digging :
-              more info on&nbsp;
-              <a
-                href="https://github.com/l3alr0g/Slashboard/#readme"
-                target="_blank"
-              >
-                Github
-              </a>
+              more info on Github.
             </div>
           </div>
           <h3 style={{ marginTop: '20px' }}>Icon</h3>
-          <select
-            name="type"
-            id="device-type"
-            className="t-select"
-            onChange={this.handleInputChange}
-          >
-            <option value="server">Server</option>
-            <option value="pc">PC</option>
-            <option value="smartphone">SmartPhone</option>
-          </select>
+          <div className="t-select">
+            <SelectType
+              options={this.deviceTypeOptions}
+              onChange={this.handleSelectChange}
+            />
+          </div>
         </ModalBody>
         <ModalFooter>
           <div className="button-band">

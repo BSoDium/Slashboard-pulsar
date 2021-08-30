@@ -11,6 +11,8 @@ import ModalHandler, {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Server } from 'renderer/components/Server';
+import SelectType from 'renderer/components/modals/SelectType';
+import { ActionMeta, ValueType } from 'react-select';
 
 interface Props {
   token: HandlerToken;
@@ -25,6 +27,12 @@ interface State {
 }
 
 class EditDeviceModal extends React.Component<Props, State> {
+  deviceTypeOptions = [
+    { value: 'server', label: 'Server' },
+    { value: 'pc', label: 'PC' },
+    { value: 'smartphone', label: 'Smartphone' },
+  ];
+
   constructor(props: Props) {
     super(props);
     const { token } = this.props;
@@ -38,6 +46,7 @@ class EditDeviceModal extends React.Component<Props, State> {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleInputChange(
@@ -52,6 +61,15 @@ class EditDeviceModal extends React.Component<Props, State> {
       [name]: value,
     } as unknown as Pick<State, keyof State>);
   }
+
+  handleSelectChange = (
+    value: ValueType<any, any>,
+    action: ActionMeta<any>
+  ) => {
+    this.setState({
+      [action.name as string]: value.value,
+    } as unknown as Pick<State, keyof State>);
+  };
 
   render() {
     const { token } = this.props;
@@ -135,17 +153,12 @@ class EditDeviceModal extends React.Component<Props, State> {
             </div>
           </div>
           <h3 style={{ marginTop: '20px' }}>Icon</h3>
-          <select
-            name="type"
-            id="device-type"
-            className="t-select"
-            defaultValue={type}
-            onChange={this.handleInputChange}
-          >
-            <option value="server">Server</option>
-            <option value="pc">PC</option>
-            <option value="smartphone">SmartPhone</option>
-          </select>
+          <div className="t-select">
+            <SelectType
+              options={this.deviceTypeOptions}
+              onChange={this.handleSelectChange}
+            />
+          </div>
         </ModalBody>
         <ModalFooter>
           <div className="button-band">
