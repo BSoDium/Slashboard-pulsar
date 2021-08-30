@@ -2,6 +2,31 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
+    currentWindow: {
+      minimize() {
+        ipcRenderer.send('minimize');
+      },
+      maximize() {
+        ipcRenderer.send('maximize');
+      },
+      close() {
+        ipcRenderer.send('close');
+      },
+    },
+    storage: {
+      getServers() {
+        return ipcRenderer.invoke('getServers');
+      },
+      addServer(ip, port, auth, type) {
+        ipcRenderer.send('addServer', ip, port, auth, type);
+      },
+      delServer(id) {
+        ipcRenderer.send('delServer', id);
+      },
+      editServer(id, ip, port, auth, type) {
+        ipcRenderer.send('editServer', id, ip, port, auth, type);
+      },
+    },
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
     },
@@ -19,14 +44,8 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
     },
-    minimize() {
-      ipcRenderer.send('minimize');
+    getVersion() {
+      return ipcRenderer.invoke('getAppVersion');
     },
-    maximize() {
-      ipcRenderer.send('maximize');
-    },
-    close() {
-      ipcRenderer.send('close');
-    }
   },
 });

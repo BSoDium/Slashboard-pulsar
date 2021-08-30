@@ -60,17 +60,14 @@
 }
 
 .server-wrapper {
-  &:hover {
-    background: #061a2b98;
-  }
   background: #061a2b65;
   border-radius: 10px;
+  box-sizing: border-box;
   width: fit-content;
   padding: 20px;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  cursor: pointer;
 }
 
 .sidebar-wrapper {
@@ -85,26 +82,28 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.error-wrapper {
+.msg-wrapper {
   text-align: center;
   position: relative;
-  height: 600px;
+  height: fit-content;
   width: 400px;
-  margin: -300px 0 0 -200px;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-wrapper {
   position: relative;
   background-color: #061a2b;
   border-radius: 10px;
-  overflow: auto;
   height: fit-content;
   width: fit-content;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .server-stats-wrapper {

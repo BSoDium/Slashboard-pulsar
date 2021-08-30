@@ -2,6 +2,8 @@ import React from 'react';
 
 interface ModalProps {
   shadow?: boolean;
+  height?: string;
+  width?: string;
   children?: JSX.Element | JSX.Element[];
 }
 
@@ -17,10 +19,16 @@ class Modal extends React.Component<ModalProps, ModalState> {
   }
 
   render() {
-    const { shadow, children } = this.props;
+    const { shadow, children, height, width } = this.props;
     return (
       <div className="modal-mask">
-        <div className={`modal-wrapper${shadow ? ' md-shadow' : ''}`}>
+        <div
+          className={`modal-wrapper${shadow ? ' md-shadow' : ''}`}
+          style={{
+            height,
+            width,
+          }}
+        >
           {children}
         </div>
       </div>

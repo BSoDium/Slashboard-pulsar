@@ -11,23 +11,22 @@
 
 .modal-header {
   box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 15%;
-  overflow: hidden;
+  height: fit-content;
 }
 
 .modal-body {
   box-sizing: border-box;
   width: 100%;
-  height: 70%;
-  overflow: hidden;
+  height: 100%;
 }
 
 .modal-footer {
   box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
   width: 100%;
-  height: 15%;
-  overflow: hidden;
+  height: fit-content;
 }
 
 .md-shadow {

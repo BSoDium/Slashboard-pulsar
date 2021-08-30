@@ -17,7 +17,7 @@ interface CompactState {
   setter: (value: boolean) => void;
 }
 
-interface Props {}
+interface Props { }
 
 interface State {
   offlineMode: boolean;

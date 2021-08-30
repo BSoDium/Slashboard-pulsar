@@ -16,6 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import Store from 'electron-store';
 
 export default class AppUpdater {
   constructor() {
@@ -26,6 +27,18 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+
+// initialize storage
+const store = new Store({ name: 'slashboard.config' });
+if (!store.has('servers')) {
+  store.set({
+    servers: {},
+    internals: {
+      settings: {},
+      preferences: {},
+    },
+  });
+}
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
@@ -43,6 +56,39 @@ ipcMain.on('maximize', () => {
 
 ipcMain.on('close', () => {
   mainWindow?.close();
+});
+
+ipcMain.handle('getServers', () => {
+  return store.get('servers');
+});
+
+ipcMain.on('addServer', (_, ip, port, auth, type) => {
+  // generate new id
+  const id = (((1 << 24) * Math.random()) | 0).toString(24).toUpperCase(); // TODO: check if no other server has this id !!!
+  // store the server credentials
+  store.set(`servers.${id}`, {
+    ip,
+    port,
+    auth,
+    type,
+  });
+});
+
+ipcMain.on('delServer', (_, id) => {
+  store.delete(`servers.${id}`);
+});
+
+ipcMain.on('editServer', (_, id, ip, port, auth, type) => {
+  store.set(`servers.${id}`, {
+    ip,
+    port,
+    auth,
+    type,
+  });
+});
+
+ipcMain.handle('getAppVersion', () => {
+  return app.getVersion();
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -86,11 +132,12 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
+  console.log(getAssetPath('server_compact.svg'));
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('server.svg'),
+    icon: getAssetPath('Slashboard.ico'),
     autoHideMenuBar: true,
     frame: false,
     backgroundColor: '#2a2c3b',

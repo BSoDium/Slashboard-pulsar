@@ -43,6 +43,16 @@
   color: #fff;
 }
 
+.b-small {
+  padding: 5px 8px;
+  border-radius: 3px;
+}
+
+.b-normal {
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+}
+
 .b-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -64,6 +74,24 @@
   font-size: 0.9rem;
   text-align: center;
   justify-content: center;
+}
+
+.btn-empty {
+  &:hover {
+    background-color: #ffffff11;
+    transition: 0.2s linear;
+  }
+  height: fit-content;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .btn-dock {

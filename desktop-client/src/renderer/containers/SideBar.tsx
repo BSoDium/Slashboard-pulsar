@@ -2,6 +2,13 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import {
+  ModalHandler,
+  HandlerToken,
+} from 'renderer/components/modals/ModalHandler';
+import InfoModal from 'renderer/components/modals/InfoModal';
+import SettingsModal from 'renderer/components/settings/SettingsModal';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faClipboard,
@@ -81,6 +88,9 @@ interface State {
 }
 
 class SideBar extends React.Component<Props, State> {
+  infoModal: HandlerToken | undefined;
+  settingsModal: HandlerToken | undefined;
+
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -92,6 +102,12 @@ class SideBar extends React.Component<Props, State> {
     this.state = {
       isSideBarOpen: false,
     };
+  }
+
+  componentDidMount() {
+    // push modal to ModalHandler
+    this.infoModal = ModalHandler.push(InfoModal, this);
+    this.settingsModal = ModalHandler.push(SettingsModal, this);
   }
 
   render() {
@@ -121,21 +137,31 @@ class SideBar extends React.Component<Props, State> {
         >
           {isSideBarOpen ? (
             <>
-              <Link to="/settings">
-                <button type="button" className="sidebar-control-button">
-                  <FontAwesomeIcon icon={faCog} size="lg" />
-                </button>
-              </Link>
-              <Link to="/info">
-                <button type="button" className="sidebar-control-button">
-                  <FontAwesomeIcon icon={faInfoCircle} size="lg" />
-                </button>
-              </Link>
-              <Link to="/">
-                <button type="button" className="sidebar-control-button">
-                  <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="sidebar-control-button"
+                onClick={() => {
+                  ModalHandler.enable(this.settingsModal!);
+                }}
+              >
+                <FontAwesomeIcon icon={faCog} size="lg" />
+              </button>
+              <button
+                type="button"
+                className="sidebar-control-button"
+                onClick={() => {
+                  ModalHandler.enable(this.infoModal!);
+                }}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} size="lg" />
+              </button>
+              <button
+                type="button"
+                className="sidebar-control-button"
+                onClick={window.electron.ipcRenderer.currentWindow.close}
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
+              </button>
               <button
                 type="button"
                 className="sidebar-control-button"
@@ -190,3 +216,4 @@ class SideBar extends React.Component<Props, State> {
 }
 
 export default withRouter(SideBar);
+export { SideBar };

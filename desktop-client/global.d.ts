@@ -2,9 +2,29 @@ declare global {
   interface Window {
     electron: {
       ipcRenderer: {
-        minimize: () => void;
-        maximize: () => void;
-        close: () => void;
+        currentWindow: {
+          minimize: () => void;
+          maximize: () => void;
+          close: () => void;
+        };
+        storage: {
+          getServers: () => Promise<any>;
+          addServer: (
+            ip: string,
+            port: string,
+            auth: string,
+            type: string
+          ) => void;
+          delServer: (id: string) => void;
+          editServer: (
+            id: string,
+            ip: string,
+            port: string,
+            auth: string,
+            type: string
+          ) => void;
+        };
+        getVersion: () => Promise<any>;
       };
     };
   }
