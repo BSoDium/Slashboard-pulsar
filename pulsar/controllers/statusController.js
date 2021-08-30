@@ -1,6 +1,7 @@
 const os = require('os');
 const fs = require('fs')
-const dInf = require('node-disk-info');
+
+let lastCpusState = { data: os.cpus(), time: Date.now() };
 
 exports.getStatus = async (req, res) => {
   try {
@@ -20,15 +21,28 @@ exports.getStatus = async (req, res) => {
     if (data === key) {
       keyIsValid = true;
 
-      let cpus = os.cpus();
-      for (let i = 0; i < cpus.length; i++) {
-        const totalTime = Object.values(cpus[i].times).reduce((a, b) => a + b, 0);
+      const currentCpusState = { data: os.cpus(), time: Date.now() };
+      let cpus = os.cpus()
+
+      for (let i = 0; i < cpus.length; i++) { // we assume the cpu count is constant
+        const cpu = cpus[i];
+        let cpuOld = lastCpusState.data[i];
+
+        const idle = cpu.times.idle - cpuOld.times.idle;
+        let total = 0;
+        for (const type in cpu.times) {
+          total += cpu.times[type] - cpuOld.times[type];
+        }
+
         cpus[i] = {
           model: cpus[i].model,
           speed: cpus[i].speed,
-          load: (cpus[i].times.user + cpus[i].times.nice + cpus[i].times.sys + cpus[i].times.irq) / totalTime * 100
+          load: 100 * (total - idle) / total
         };
       }
+
+
+      lastCpusState = currentCpusState;
 
       const content = {
         "status": "active",

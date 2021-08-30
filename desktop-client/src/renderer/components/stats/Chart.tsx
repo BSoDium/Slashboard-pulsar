@@ -4,6 +4,7 @@ import { curveBasis } from '@visx/curve';
 import { LinePath } from '@visx/shape';
 import { ScaleSVG } from '@visx/responsive';
 import { Group } from '@visx/group';
+import { AxisLeft, AxisBottom } from '@visx/axis';
 import { scaleTime, scaleLinear } from '@visx/scale';
 import { extent, max } from 'd3-array';
 
@@ -101,6 +102,7 @@ class Chart extends React.Component<ChartProps, ChartState> {
             ry={14}
           />
           <Group top={margin?.top} left={margin?.left!}>
+            {/* <AxisLeft scale={yScale} stroke="#fff" tickStroke="#fff" /> */}
             {width > 0 &&
               height > 0 &&
               data.map((series, i) => (

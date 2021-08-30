@@ -91,7 +91,7 @@ class ServerStats extends React.Component<any, State> {
               memoryState={response.data.hardware.memory}
               duration={100}
             />
-            <Console />
+            {/* <Console /> */}
           </div>
         </div>
       );
