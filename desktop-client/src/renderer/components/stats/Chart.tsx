@@ -2,6 +2,7 @@ import React from 'react';
 
 import { curveBasis } from '@visx/curve';
 import { LinePath } from '@visx/shape';
+import { ScaleSVG } from '@visx/responsive';
 import { Group } from '@visx/group';
 import { scaleTime, scaleLinear } from '@visx/scale';
 import { extent, max } from 'd3-array';
@@ -91,7 +92,7 @@ class Chart extends React.Component<ChartProps, ChartState> {
 
     return (
       <div className="chart">
-        <svg width={width} height={height}>
+        <ScaleSVG width={width} height={height}>
           <rect
             width={width}
             height={height}
@@ -131,7 +132,7 @@ class Chart extends React.Component<ChartProps, ChartState> {
                 ))
               )}
           </Group>
-        </svg>
+        </ScaleSVG>
       </div>
     );
   }
