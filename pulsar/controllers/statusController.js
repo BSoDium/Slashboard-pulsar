@@ -5,7 +5,7 @@ const dInf = require('node-disk-info');
 exports.getStatus = async (req, res) => {
   try {
     const { key } = req.params;
-    let data, disks = null;
+    let data = null;
     let keyIsValid = false;
 
     // Get the key from the txt file (security improvement required)
@@ -17,36 +17,38 @@ exports.getStatus = async (req, res) => {
       return res.status(401).json({ error: FileError.message });
     }
 
-    // Fetch mounted disks
-    try {
-      disks = dInf.getDiskInfoSync();
-    } catch (DiskError) {
-      console.error(DiskError.message);
-      return res.status(401).json({ error: DiskError.message });
-    }
-
     if (data === key) {
       keyIsValid = true;
-      
+
+      let cpus = os.cpus();
+      for (let i = 0; i < cpus.length; i++) {
+        const totalTime = Object.values(cpus[i].times).reduce((a, b) => a + b, 0);
+        cpus[i] = {
+          model: cpus[i].model,
+          speed: cpus[i].speed,
+          load: (cpus[i].times.user + cpus[i].times.nice + cpus[i].times.sys + cpus[i].times.irq) / totalTime * 100
+        };
+      }
+
       const content = {
         "status": "active",
         "name": os.hostname(),
-        "os" : {
-          "type" : os.type(),
-          "platform" : os.platform(),
-          "architecture" : os.arch(),
-          "release" : os.release(),
+        "os": {
+          "type": os.type(),
+          "platform": os.platform(),
+          "architecture": os.arch(),
+          "release": os.release(),
         },
-        "hardware" : {
-          "cpus" : os.cpus(),
-          "memory" : {
-            "total" : os.totalmem(),
-            "free" : os.freemem(),
+        "hardware": {
+          "cpus": cpus,
+          "memory": {
+            "total": os.totalmem(),
+            "free": os.freemem(),
           },
-          "network" : {
-            "interfaces" : os.networkInterfaces(),
+          "network": {
+            "interfaces": os.networkInterfaces(),
           },
-          "disks" : disks,
+          "disks": {},
         },
       }
       return res.status(200).json({ data: content });
@@ -77,15 +79,15 @@ exports.getOverview = async (req, res) => {
 
     if (data === key) {
       keyIsValid = true;
-      
+
       const content = {
         "status": "active",
         "name": os.hostname(),
-        "os" : {
-          "type" : os.type(),
-          "platform" : os.platform(),
-          "architecture" : os.arch(),
-          "release" : os.release(),
+        "os": {
+          "type": os.type(),
+          "platform": os.platform(),
+          "architecture": os.arch(),
+          "release": os.release(),
         }
       }
       return res.status(200).json({ data: content });

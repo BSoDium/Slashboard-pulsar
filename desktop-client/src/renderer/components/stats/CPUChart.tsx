@@ -46,7 +46,7 @@ class CPUChart extends React.Component<CPUChartProps, CPUChartState> {
     for (let i = 0; i < this.data.length; i++) {
       // push the new cpu values for each core
       this.data[i].push({
-        value: coreStates[i].speed,
+        value: coreStates[i].load,
         date: new Date(),
         style: defaultStyles.pointStyle,
       });
