@@ -19,9 +19,16 @@ class LoadingSpinner extends React.Component<Props, State> {
   render() {
     const { text } = this.props;
     return (
-      <div className="Loader-container">
-        <div className="spinner">ee</div>
-        {text}
+      <div className="Loader-container ld-centered">
+        <div className="sk-chase">
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+        </div>
+        <span style={{ marginTop: '40px' }}>{text}</span>
       </div>
     );
   }

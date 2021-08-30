@@ -10,7 +10,7 @@ import ModalHandler, {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import ServerList from 'renderer/containers/ServerList';
+import { Server } from 'renderer/components/Server';
 
 interface Props {
   token: HandlerToken;
@@ -24,15 +24,17 @@ interface State {
   type: string;
 }
 
-class AddDeviceModal extends React.Component<Props, State> {
+class EditDeviceModal extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    const { token } = this.props;
+    const data = (token.emitter as Server).getData();
     this.state = {
       showHelp: false,
-      ip: '',
-      port: '',
-      auth: '',
-      type: 'server', // default select value
+      ip: data.ip,
+      port: data.port,
+      auth: data.auth,
+      type: data.type,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -59,7 +61,7 @@ class AddDeviceModal extends React.Component<Props, State> {
         <ModalHeader
           style={{ padding: '15px 0px 15px 20px', background: '#0e3455' }}
         >
-          <h2 className="h-normal h-primary">Add device</h2>
+          <h2 className="h-normal h-primary">Edit device</h2>
         </ModalHeader>
         <ModalBody
           style={{
@@ -76,6 +78,7 @@ class AddDeviceModal extends React.Component<Props, State> {
             name="ip"
             placeholder="IP address"
             className="t-input"
+            defaultValue={ip}
             required
             onChange={this.handleInputChange}
           />
@@ -85,6 +88,7 @@ class AddDeviceModal extends React.Component<Props, State> {
             name="port"
             placeholder="Port"
             className="t-input"
+            defaultValue={port}
             required
             onChange={this.handleInputChange}
           />
@@ -106,6 +110,7 @@ class AddDeviceModal extends React.Component<Props, State> {
             name="auth"
             placeholder="Pairing key"
             className="t-input"
+            defaultValue={auth}
             required
             onChange={this.handleInputChange}
           />
@@ -118,9 +123,9 @@ class AddDeviceModal extends React.Component<Props, State> {
             <div className="h-bold h-primary">Where do I find this key ?</div>
             <div className="h-secondary" style={{ marginTop: '10px' }}>
               Pulsar attributes a unique key to your server when running the
-              configuration script for the first time. If you did not write it
-              down, you can still get it back, but this requires some digging :
-              more info on&nbsp;
+              configuration script for the first time. <br />
+              If you did not write it down, you can still get it back, but this
+              requires some digging : more info on&nbsp;
               <a
                 href="https://github.com/l3alr0g/Slashboard/#readme"
                 target="_blank"
@@ -134,6 +139,7 @@ class AddDeviceModal extends React.Component<Props, State> {
             name="type"
             id="device-type"
             className="t-select"
+            defaultValue={type}
             onChange={this.handleInputChange}
           >
             <option value="server">Server</option>
@@ -158,8 +164,10 @@ class AddDeviceModal extends React.Component<Props, State> {
               type="submit"
               className="btn-standard b-primary b-shadow"
               onClick={() => {
+                const emitter = token.emitter as Server;
                 // ipcRenderer bridge
-                window.electron.ipcRenderer.storage.addServer(
+                window.electron.ipcRenderer.storage.editServer(
+                  emitter.getId(),
                   ip,
                   port,
                   auth,
@@ -168,7 +176,7 @@ class AddDeviceModal extends React.Component<Props, State> {
                 // close modal
                 ModalHandler.disable(token);
                 // update server list
-                (token.emitter as ServerList).fetch();
+                emitter.props.listRefresh();
               }}
             >
               Done
@@ -180,4 +188,4 @@ class AddDeviceModal extends React.Component<Props, State> {
   }
 }
 
-export default AddDeviceModal;
+export default EditDeviceModal;

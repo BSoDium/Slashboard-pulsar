@@ -10,6 +10,7 @@ import ModalHandler, {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 import DelDeviceModal from 'renderer/components/modals/DelDeviceModal';
+import EditDeviceModal from 'renderer/components/modals/EditDeviceModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen, faSync } from '@fortawesome/free-solid-svg-icons';
@@ -20,11 +21,7 @@ const statusColorMap: { [key: string]: string } = {
   down: '#ff001e',
 };
 
-interface iconDictionary {
-  [key: string]: string;
-}
-
-const icons: iconDictionary = {
+const icons: { [key: string]: string } = {
   server: serverIcon,
   pc: pcIcon,
   smartphone: phoneIcon,
@@ -47,6 +44,7 @@ interface State {
 
 class Server extends React.Component<Props, State> {
   delModal: HandlerToken | undefined;
+  editModal: HandlerToken | undefined;
 
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -69,6 +67,10 @@ class Server extends React.Component<Props, State> {
     return this.props.id;
   }
 
+  getData(): any {
+    return this.props.data;
+  }
+
   fetchData() {
     const { data } = this.props;
     const url = `http://${data.ip}:${data.port}/${data.auth}/status-compact`;
@@ -86,6 +88,7 @@ class Server extends React.Component<Props, State> {
 
   componentDidMount() {
     this.delModal = ModalHandler.push(DelDeviceModal, this);
+    this.editModal = ModalHandler.push(EditDeviceModal, this);
     this.fetchData();
   }
 
@@ -122,17 +125,23 @@ class Server extends React.Component<Props, State> {
               <div className="server-menu">
                 <button
                   type="button"
-                  className="btn-empty"
+                  className="btn-empty b-small"
                   onClick={this.fetchData}
                 >
                   <FontAwesomeIcon icon={faSync} />
                 </button>
-                <button type="button" className="btn-empty">
+                <button
+                  type="button"
+                  className="btn-empty b-small"
+                  onClick={() => {
+                    ModalHandler.enable(this.editModal!);
+                  }}
+                >
                   <FontAwesomeIcon icon={faPen} />
                 </button>
                 <button
                   type="button"
-                  className="btn-empty"
+                  className="btn-empty b-small"
                   onClick={() => {
                     ModalHandler.enable(this.delModal!);
                   }}

@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('electron', {
       },
       close() {
         ipcRenderer.send('close');
-      }
+      },
     },
     storage: {
       getServers() {
@@ -22,7 +22,10 @@ contextBridge.exposeInMainWorld('electron', {
       },
       delServer(id) {
         ipcRenderer.send('delServer', id);
-      } 
+      },
+      editServer(id, ip, port, auth, type) {
+        ipcRenderer.send('editServer', id, ip, port, auth, type);
+      },
     },
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
@@ -40,6 +43,9 @@ contextBridge.exposeInMainWorld('electron', {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
-    }
+    },
+    getVersion() {
+      return ipcRenderer.invoke('getAppVersion');
+    },
   },
 });

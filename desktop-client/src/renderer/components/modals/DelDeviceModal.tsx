@@ -8,8 +8,6 @@ import ModalHandler, {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Server } from 'renderer/components/Server';
 
 interface Props {
@@ -22,18 +20,11 @@ class DelDeviceModal extends React.Component<Props, State> {
   render() {
     const { token } = this.props;
     return (
-      <Modal height="fit-content" width="700px">
+      <Modal height="fit-content" width="600px">
         <ModalHeader
           style={{ padding: '15px 0px 15px 20px', background: '#0e3455' }}
         >
-          <h2 className="h-normal h-primary">
-            <FontAwesomeIcon
-              size="1x"
-              icon={faMinusSquare}
-              style={{ marginRight: '25px' }}
-            />
-            Delete device
-          </h2>
+          <h2 className="h-normal h-primary">Delete device</h2>
         </ModalHeader>
         <ModalBody
           style={{
@@ -43,27 +34,26 @@ class DelDeviceModal extends React.Component<Props, State> {
             flexDirection: 'column',
           }}
         >
-          Are you sure you want to delete this server ?
+          Are you sure you want to delete this device ?
         </ModalBody>
         <ModalFooter>
           <div className="button-band">
             <button
               type="reset"
-              className="btn-standard b-secondary b-shadow"
+              className="btn-empty b-normal"
               onClick={() => {
                 // close modal
                 ModalHandler.disable(token);
               }}
               style={{ marginRight: '10px' }}
             >
-              Probably
+              Cancel
             </button>
             <button
               type="submit"
               className="btn-standard b-primary b-shadow"
               onClick={() => {
                 const emitter = token.emitter as Server;
-
                 // ipcRenderer bridge
                 window.electron.ipcRenderer.storage.delServer(emitter.getId());
                 // close modal

@@ -13,9 +13,11 @@
 @import './sass/pages/dashboard';
 @import './sass/pages/login';
 @import './sass/pages/serverstats';
+@import './sass/pages/settings';
 
 body {
   font-family: Montserrat;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }

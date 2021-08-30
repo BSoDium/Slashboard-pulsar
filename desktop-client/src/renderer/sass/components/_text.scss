@@ -47,13 +47,21 @@ h3 {
   color: rgb(209, 209, 209);
 }
 
-.t-input {
+.t-input,
+.t-select {
   height: 50px;
   background-color: #0f2436;
   border-radius: 7px;
   margin: 10px 0px;
-  padding-left: 10px;
+  padding: 0px 10px;
   border: none;
   color: white;
   font-size: medium;
+}
+
+.t-select::backdrop {
+  color: white;
+  background-color: #0f2436;
+  border-radius: 7px;
+  border: none;
 }

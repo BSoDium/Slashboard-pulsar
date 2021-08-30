@@ -9,6 +9,7 @@ import ControlPanel from 'renderer/containers/ControlPanel';
 import IOT from 'renderer/containers/IOT';
 import Logs from 'renderer/containers/Logs';
 import ServerStats from 'renderer/components/stats/ServerStats';
+import Settings from 'renderer/components/Settings';
 
 import 'renderer/App.global.scss';
 
@@ -39,6 +40,14 @@ class App extends React.Component<Props, State> {
           <Route path="/login">
             <Window>
               <Login />
+            </Window>
+          </Route>
+
+          <Route path="/settings">
+            <Window>
+              <Dashboard>
+                <Settings />
+              </Dashboard>
             </Window>
           </Route>
 

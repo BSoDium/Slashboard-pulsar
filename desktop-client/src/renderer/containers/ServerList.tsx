@@ -11,12 +11,12 @@ import {
 import { CompactState } from 'renderer/App';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 import {
-  faSync,
-  faPlus,
-  faWifi,
-  faInfoCircle,
-} from '@fortawesome/free-solid-svg-icons';
+  EmptyDashboard,
+  NoInternet,
+} from 'renderer/components/ContextMessages';
 
 interface Props {
   offline: CompactState;
@@ -26,6 +26,7 @@ interface State {
   servers: any[];
   lastUpdated: Date;
   timeSinceLastUpdate: string;
+  isLoading: boolean;
 }
 
 class ServerList extends React.Component<Props, State> {
@@ -38,6 +39,7 @@ class ServerList extends React.Component<Props, State> {
       servers: [],
       lastUpdated: new Date(),
       timeSinceLastUpdate: 'now',
+      isLoading: true,
     };
 
     this.fetch = this.fetch.bind(this);
@@ -60,7 +62,7 @@ class ServerList extends React.Component<Props, State> {
 
   async fetch() {
     const servers = await window.electron.ipcRenderer.storage.getServers();
-    this.setState({ servers });
+    this.setState({ servers, isLoading: false });
   }
 
   componentWillUnmount() {
@@ -69,7 +71,7 @@ class ServerList extends React.Component<Props, State> {
   }
 
   render() {
-    const { servers, timeSinceLastUpdate, lastUpdated } = this.state;
+    const { servers, timeSinceLastUpdate, lastUpdated, isLoading } = this.state;
     const { offline } = this.props;
     return (
       <div className="body-panel-wrapper">
@@ -118,58 +120,34 @@ class ServerList extends React.Component<Props, State> {
               </div>
             </div>
             <div className="list-content">
-              {Object.values(servers).map((serverData, i) => {
-                const id = Object.keys(servers)[i];
-                return (
-                  <Server
-                    key={`${id}-${lastUpdated.getTime()}`}
-                    data={serverData}
-                    id={id}
-                    listRefresh={this.fetch}
+              {!isLoading &&
+                (Object.values(servers).length ? (
+                  Object.values(servers).map((serverData, i) => {
+                    const id = Object.keys(servers)[i];
+                    return (
+                      <Server
+                        key={`${id}-${lastUpdated.getTime()}`}
+                        data={serverData}
+                        id={id}
+                        listRefresh={this.fetch}
+                      />
+                    );
+                  })
+                ) : (
+                  <EmptyDashboard
+                    onClick={() => {
+                      ModalHandler.enable(this.addModal!);
+                    }}
                   />
-                );
-              })}
+                ))}
             </div>
           </>
         ) : (
-          <div className="error-wrapper">
-            <FontAwesomeIcon
-              icon={faWifi}
-              size="8x"
-              color="#d4d4d4"
-              style={{ paddingBottom: '30px' }}
-            />
-            <h1>Sorry</h1>
-            <h2>We couldn't find the internet</h2>
-            <div className="tag t-dark" style={{ marginTop: '30px' }}>
-              <p style={{ fontWeight: 'bold' }}>
-                <FontAwesomeIcon
-                  icon={faInfoCircle}
-                  color="#d4d4d4"
-                  style={{ paddingRight: '7px' }}
-                />
-                Troubleshooting :
-              </p>
-              <p>
-                This error is being displayed because your computer doesn't seem
-                to be connected to the internet. In order to display relevant
-                data, Slashboard needs a stable internet connection.
-              </p>
-              <p style={{ color: 'rgb(0, 255, 0)' }}>
-                If you're using a wifi connection, try connecting to your router
-                via ethernet. If this doesn't work, try rebooting the router.
-              </p>
-            </div>
-            <button
-              className="btn-standard b-dark b-shadow"
-              style={{ marginTop: '30px' }}
-              onClick={() => {
-                offline.setter(true);
-              }}
-            >
-              Ignore
-            </button>
-          </div>
+          <NoInternet
+            onClick={() => {
+              offline.setter(true);
+            }}
+          />
         )}
       </div>
     );

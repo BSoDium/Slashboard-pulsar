@@ -78,6 +78,19 @@ ipcMain.on('delServer', (event, id) => {
   store.delete(`servers.${id}`);
 });
 
+ipcMain.on('editServer', (event, id, ip, port, auth, type) => {
+  store.set(`servers.${id}`, {
+    ip,
+    port,
+    auth,
+    type,
+  });
+});
+
+ipcMain.handle('getAppVersion', () => {
+  return app.getVersion(); // TODO : this actually gives the electron version, not the app's
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -123,7 +136,7 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('server.svg'),
+    icon: getAssetPath('server_compact.svg'),
     autoHideMenuBar: true,
     frame: false,
     backgroundColor: '#2a2c3b',

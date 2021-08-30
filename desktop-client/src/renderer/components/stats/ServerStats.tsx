@@ -1,17 +1,13 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHeartBroken,
-  faLock,
-  faInfoCircle,
-} from '@fortawesome/free-solid-svg-icons';
 
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
+import Console from 'renderer/components/stats/Console';
 import LoadingSpinner from '../loading/LoadingSpinner';
+
+import { InvalidKey, Unresponsive } from 'renderer/components/ContextMessages';
 
 interface State {
   isLoading: boolean;
@@ -72,86 +68,10 @@ class ServerStats extends React.Component<any, State> {
     let content: JSX.Element;
     if (serverTimedOut) {
       // server is down or misconfigured, request timed out
-      content = (
-        <div className="error-wrapper">
-          <FontAwesomeIcon
-            icon={faHeartBroken}
-            size="8x"
-            color="#d4d4d4"
-            style={{ paddingBottom: '30px' }}
-          />
-          <h1>Woops...</h1>
-          <h2>Your server is unresponsive</h2>
-          <div className="tag t-dark" style={{ marginTop: '30px' }}>
-            <p style={{ fontWeight: 'bold' }}>
-              <FontAwesomeIcon
-                icon={faInfoCircle}
-                color="#d4d4d4"
-                style={{ paddingRight: '7px' }}
-              />
-              Troubleshooting :
-            </p>
-            <p>
-              This error is being displayed because the server failed to answer
-              the client's request. It might be due either to a broken
-              connection between the client and the server, or to the Pulsar
-              service having stopped working.
-            </p>
-            <p style={{ color: 'rgb(0, 255, 0)' }}>
-              Try rebooting the server. If this doesn't work, try reinstalling
-              Pulsar.
-            </p>
-          </div>
-          <Link to="/">
-            <button
-              className="btn-standard b-dark b-shadow"
-              style={{ marginTop: '30px' }}
-            >
-              Go back
-            </button>
-          </Link>
-        </div>
-      );
+      content = <Unresponsive />;
     } else if (authFailed) {
       // wrong key provided, server returned status "access denied"
-      content = (
-        <div className="error-wrapper">
-          <FontAwesomeIcon
-            icon={faLock}
-            size="8x"
-            color="#d4d4d4"
-            style={{ paddingBottom: '30px' }}
-          />
-          <h1>Sorry</h1>
-          <h2>That key's not gonna work</h2>
-          <div className="tag t-dark" style={{ marginTop: '30px' }}>
-            <p style={{ fontWeight: 'bold' }}>
-              <FontAwesomeIcon
-                icon={faInfoCircle}
-                color="#d4d4d4"
-                style={{ paddingRight: '7px' }}
-              />
-              Troubleshooting :
-            </p>
-            <p>
-              This error is being displayed because the server returned the
-              "access denied" status. This generally means that the pairing key
-              is invalid and needs to be updated.
-            </p>
-            <p style={{ color: 'rgb(255, 0, 0)' }}>
-              No quick fix is available at the moment. Please file an issue.
-            </p>
-          </div>
-          <Link to="/">
-            <button
-              className="btn-standard b-dark b-shadow"
-              style={{ marginTop: '30px' }}
-            >
-              Go back
-            </button>
-          </Link>
-        </div>
-      );
+      content = <InvalidKey />;
     } else if (!isLoading) {
       // response is readable, display stats
       const { ip, port } = this.props.match.params;
@@ -171,11 +91,12 @@ class ServerStats extends React.Component<any, State> {
               memoryState={response.data.hardware.memory}
               duration={100}
             />
+            <Console />
           </div>
         </div>
       );
     } else {
-      content = <LoadingSpinner />;
+      content = <LoadingSpinner text={'Fetching data'} />;
     }
     return (
       <div className="body-wrapper">

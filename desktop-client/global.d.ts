@@ -16,7 +16,15 @@ declare global {
             type: string
           ) => void;
           delServer: (id: string) => void;
+          editServer: (
+            id: string,
+            ip: string,
+            port: string,
+            auth: string,
+            type: string
+          ) => void;
         };
+        getVersion: () => Promise<any>;
       };
     };
   }

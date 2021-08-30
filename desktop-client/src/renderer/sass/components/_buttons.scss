@@ -43,6 +43,16 @@
   color: #fff;
 }
 
+.b-small {
+  padding: 5px 8px;
+  border-radius: 3px;
+}
+
+.b-normal {
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+}
+
 .b-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -75,8 +85,6 @@
   width: fit-content;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 5px 8px;
-  border-radius: 3px;
   border: none;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0);
