@@ -33,7 +33,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - run: yarn global add concurrently
+    - run: yarn global add concurrently cross-env
     - run: yarn --cwd desktop-client build
     - run: yarn --cwd desktop-client test
       
