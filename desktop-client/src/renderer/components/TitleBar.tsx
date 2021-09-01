@@ -3,14 +3,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
-interface Props {}
-
 interface State {
   fullscreen: boolean;
 }
 
-class TitleBar extends React.Component<Props, State> {
-  constructor(props: Props | Readonly<Props>) {
+class TitleBar extends React.Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       fullscreen: false, // should be set by electron

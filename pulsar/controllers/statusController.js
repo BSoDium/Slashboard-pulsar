@@ -1,12 +1,19 @@
 const os = require('os');
 const fs = require('fs')
+const dInf = require('node-disk-info');
+var exec = require('child_process').exec;
 
-let lastCpusState = { data: os.cpus(), time: Date.now() };
+function execute(command, callback) {
+  exec(command, function (error, stdout, stderr) { callback(stdout); });
+};
+
+// as os returns an average since system boot, we need to calculate the average since the last request
+let lastCoresState = { data: os.cpus(), time: Date.now() };
 
 exports.getStatus = async (req, res) => {
   try {
     const { key } = req.params;
-    let data = null;
+    let data, disks = null;
     let keyIsValid = false;
 
     // Get the key from the txt file (security improvement required)
@@ -18,31 +25,51 @@ exports.getStatus = async (req, res) => {
       return res.status(401).json({ error: FileError.message });
     }
 
+    // Fetch mounted disks
+    try {
+      disks = dInf.getDiskInfoSync();
+    } catch (DiskError) {
+      console.error(DiskError.message);
+      return res.status(401).json({ error: DiskError.message });
+    }
+
     if (data === key) {
       keyIsValid = true;
 
-      const currentCpusState = { data: os.cpus(), time: Date.now() };
-      let cpus = os.cpus()
 
-      for (let i = 0; i < cpus.length; i++) { // we assume the cpu count is constant
-        const cpu = cpus[i];
-        let cpuOld = lastCpusState.data[i];
+      let cpuModels = [];
 
-        const idle = cpu.times.idle - cpuOld.times.idle;
+      // calculate CPU load for each core
+      const currentCoresState = { data: os.cpus(), time: Date.now() };
+      let cores = os.cpus()
+
+      for (let i = 0; i < cores.length; i++) { // we assume the cpu count is constant
+        const core = cores[i];
+        let coreOld = lastCoresState.data[i];
+        // compare the current and the last cpu state
+
+        const idle = core.times.idle - coreOld.times.idle;
         let total = 0;
-        for (const type in cpu.times) {
-          total += cpu.times[type] - cpuOld.times[type];
+        for (const type in core.times) {
+          total += core.times[type] - coreOld.times[type];
         }
 
-        cpus[i] = {
-          model: cpus[i].model,
-          speed: cpus[i].speed,
+        cores[i] = {
+          model: cores[i].model,
+          speed: cores[i].speed,
           load: 100 * (total - idle) / total
         };
+
+        // at the same time, we record all the different cpu models available
+        if (!cpuModels.includes(cores[i].model)) {
+          cpuModels.push(cores[i].model);
+        }
       }
 
+      // save the current cpu state for the next request
+      lastCoresState = currentCoresState;
 
-      lastCpusState = currentCpusState;
+      // calculate the average load for the entire cpu
 
       const content = {
         "status": "active",
@@ -54,7 +81,14 @@ exports.getStatus = async (req, res) => {
           "release": os.release(),
         },
         "hardware": {
-          "cpus": cpus,
+          "cpu": {
+            "cores": cores,
+            "global": {
+              "model": cpuModels.join(', '), // multi cpu situation is (kind of) handled
+              "speed": cores.reduce((acc, cur) => acc + cur.speed, 0) / cores.length,
+              "load": cores.reduce((acc, cur) => acc + cur.load, 0) / cores.length
+            }
+          },
           "memory": {
             "total": os.totalmem(),
             "free": os.freemem(),
@@ -62,7 +96,7 @@ exports.getStatus = async (req, res) => {
           "network": {
             "interfaces": os.networkInterfaces(),
           },
-          "disks": {},
+          "disks": disks,
         },
       }
       return res.status(200).json({ data: content });

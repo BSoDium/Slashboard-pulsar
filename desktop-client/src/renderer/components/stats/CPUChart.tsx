@@ -6,21 +6,32 @@ import defaultStyles from 'renderer/components/stats/ChartStyles';
 import OWStack from 'renderer/utils/OWStack';
 import ColorGen from 'renderer/utils/ColorGen';
 
-interface CPUChartProps {
-  coreStates: any[];
+interface Props {
+  coreStates: Array<{
+    model: string;
+    speed: number;
+    load: number;
+  }>;
   duration: number;
+  title: string;
+  subtitle: string;
 }
 
-interface CPUChartState {}
+interface State {
+  areaChart: boolean; // if only one core is provided, show area chart
+}
 
 /**
  * A chart showing cpu usage accross time.
  */
-class CPUChart extends React.Component<CPUChartProps, CPUChartState> {
+class CPUChart extends React.Component<Props, State> {
   data: Array<OWStack<Point>>;
 
-  constructor(props: CPUChartProps) {
+  constructor(props: Props) {
     super(props);
+    this.state = {
+      areaChart: this.props.coreStates.length === 1,
+    };
 
     // instantiate and initialize stacks
     this.data = new Array<OWStack<Point>>(this.props.coreStates.length);
@@ -40,7 +51,7 @@ class CPUChart extends React.Component<CPUChartProps, CPUChartState> {
   }
 
   render() {
-    const { coreStates } = this.props;
+    const { coreStates, title, subtitle } = this.props;
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
     for (let i = 0; i < this.data.length; i++) {
@@ -68,7 +79,17 @@ class CPUChart extends React.Component<CPUChartProps, CPUChartState> {
       <div className="server-chart">
         <ParentSize>
           {(parent) => {
-            return <Chart data={arrayData} width={parent.width} height={300} />;
+            return (
+              <Chart
+                data={arrayData}
+                width={parent.width}
+                height={300}
+                scaleXMax={100}
+                area={this.state.areaChart}
+                title={title}
+                subtitle={subtitle}
+              />
+            );
           }}
         </ParentSize>
       </div>

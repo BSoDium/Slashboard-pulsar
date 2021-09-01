@@ -4,9 +4,7 @@ interface Props {
   text?: string;
 }
 
-interface State {}
-
-class LoadingSkeleton extends React.Component<Props, State> {
+class LoadingSkeleton extends React.Component<Props, {}> {
   static defaultProps = {
     text: '',
   };

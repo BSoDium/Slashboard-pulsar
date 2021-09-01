@@ -5,20 +5,21 @@ import { Chart, Point, Line } from 'renderer/components/stats/Chart';
 import defaultStyles from 'renderer/components/stats/ChartStyles';
 import OWStack from 'renderer/utils/OWStack';
 
-interface RAMChartProps {
-  memoryState: any;
+interface Props {
+  memoryState: {
+    total: number;
+    free: number;
+  };
   duration: number;
 }
-
-interface RAMChartState {}
 
 /**
  * A chart showing cpu usage accross time.
  */
-class RAMChart extends React.Component<RAMChartProps, RAMChartState> {
+class RAMChart extends React.Component<Props, {}> {
   data: OWStack<Point>;
 
-  constructor(props: RAMChartProps) {
+  constructor(props: Props) {
     super(props);
 
     // instantiate and initialize stack
@@ -40,7 +41,7 @@ class RAMChart extends React.Component<RAMChartProps, RAMChartState> {
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
     this.data.push({
-      value: memoryState.free,
+      value: (100 * memoryState.free) / memoryState.total,
       date: new Date(),
       style: defaultStyles.pointStyle,
     });
@@ -49,7 +50,7 @@ class RAMChart extends React.Component<RAMChartProps, RAMChartState> {
       data: this.data.toArray(),
       style: {
         cursor: 'auto',
-        stroke: '#cc0f0f',
+        stroke: '#ff2e2e',
         strokeWidth: 2,
         strokeOpacity: 1,
         shapeRendering: 'geometricPrecision',
@@ -60,7 +61,15 @@ class RAMChart extends React.Component<RAMChartProps, RAMChartState> {
       <div className="server-chart">
         <ParentSize>
           {(parent) => {
-            return <Chart data={arrayData} width={parent.width} height={300} />;
+            return (
+              <Chart
+                data={arrayData}
+                width={parent.width}
+                height={300}
+                scaleXMax={100}
+                area
+              />
+            );
           }}
         </ParentSize>
       </div>

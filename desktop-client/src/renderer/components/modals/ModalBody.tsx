@@ -1,17 +1,15 @@
 import React from 'react';
 
-interface ModalBodyProps {
+interface Props {
   children?: JSX.Element | JSX.Element[] | string;
   style?: React.CSSProperties;
 }
 
-interface ModalBodyState {}
-
-class ModalBody extends React.Component<ModalBodyProps, ModalBodyState> {
+class ModalBody extends React.Component<Props, {}> {
   static defaultProps = {
     shadow: false,
   };
-  constructor(props: ModalBodyProps) {
+  constructor(props: Props) {
     super(props);
   }
 

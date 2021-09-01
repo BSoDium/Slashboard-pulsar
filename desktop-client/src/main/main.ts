@@ -134,11 +134,11 @@ const createWindow = async () => {
 
   console.log(getAssetPath('server_compact.svg'));
   mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728,
+    width: 1280,
+    height: 720,
     icon: getAssetPath('Slashboard.ico'),
     autoHideMenuBar: true,
+    show: false,
     frame: false,
     backgroundColor: '#2a2c3b',
     webPreferences: {

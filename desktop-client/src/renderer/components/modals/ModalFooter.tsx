@@ -1,17 +1,15 @@
 import React from 'react';
 
-interface ModalFooterProps {
+interface Props {
   children?: JSX.Element | JSX.Element[] | string;
   style?: React.CSSProperties;
 }
 
-interface ModalFooterState {}
-
-class ModalFooter extends React.Component<ModalFooterProps, ModalFooterState> {
+class ModalFooter extends React.Component<Props, {}> {
   static defaultProps = {
     shadow: false,
   };
-  constructor(props: ModalFooterProps) {
+  constructor(props: Props) {
     super(props);
   }
 
