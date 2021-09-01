@@ -32,7 +32,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: Build and test Desktop Client
     - run: cd desktop-client
     - run: yarn build
     - run: yarn test
