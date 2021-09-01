@@ -12,7 +12,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -22,20 +22,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: pulsar/package-lock.json
     - run: cd pulsar
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm --cwd pulsar ci
+    - run: npm --cwd pulsar run build --if-present
+    - run: npm --cwd pulsar test
 
   build-desktop-client:
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v2
-    - name: Build and test Desktop Client
-    - run: cd desktop-client
-    - run: yarn build
-    - run: yarn test
+    - run: yarn --cwd desktop-client
+    - run: yarn --cwd desktop-client build
+    - run: yarn --cwd desktop-client test
       
     
     
