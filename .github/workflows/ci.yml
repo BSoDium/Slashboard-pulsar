@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, ci-cd/** ]
+    branches: [ main, ci-cd/* ]
   pull_request:
-    branches: [ main, ci-cd/** ]
+    branches: [ main, ci-cd/* ]
 
 jobs:
   build-pulsar:
