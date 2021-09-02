@@ -31,10 +31,13 @@
 
 .chart-title {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(2px);
 }
 
 .terminal-wrapper {
@@ -73,8 +76,10 @@
 }
 
 .disk-explorer {
-  padding: 20px;
+  margin: 15px;
+  padding: 5px;
   overflow: auto;
+  max-height: 250px;
 }
 
 .disk-explorer-item {

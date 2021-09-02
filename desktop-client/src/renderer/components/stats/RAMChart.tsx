@@ -68,6 +68,8 @@ class RAMChart extends React.Component<Props, {}> {
                 height={300}
                 scaleXMax={100}
                 area
+                title="RAM"
+                subtitle="Memory usage"
               />
             );
           }}

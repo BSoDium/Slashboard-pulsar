@@ -51,7 +51,7 @@ ipcMain.on('minimize', () => {
 });
 
 ipcMain.on('maximize', () => {
-  mainWindow?.maximize();
+  mainWindow?.isMaximized() ? mainWindow?.unmaximize() : mainWindow?.maximize();
 });
 
 ipcMain.on('close', () => {
