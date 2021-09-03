@@ -79,6 +79,7 @@ exports.getStatus = async (req, res) => {
           "platform": os.platform(),
           "architecture": os.arch(),
           "release": os.release(),
+          "uptime": os.uptime(),
         },
         "hardware": {
           "cpu": {
