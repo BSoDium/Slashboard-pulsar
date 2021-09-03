@@ -14,7 +14,6 @@ exports.getStatus = async (req, res) => {
   try {
     const { key } = req.params;
     let data, disks = null;
-    let keyIsValid = false;
 
     // Get the key from the txt file (security improvement required)
     try {
@@ -34,8 +33,6 @@ exports.getStatus = async (req, res) => {
     }
 
     if (data === key) {
-      keyIsValid = true;
-
 
       let cpuModels = [];
 
@@ -115,7 +112,6 @@ exports.getOverview = async (req, res) => {
   try {
     const { key } = req.params;
     let data = null;
-    let keyIsValid = false;
 
     // Get the key from the txt file (security improvement required)
     try {
@@ -127,7 +123,6 @@ exports.getOverview = async (req, res) => {
     }
 
     if (data === key) {
-      keyIsValid = true;
 
       const content = {
         "status": "active",
@@ -141,9 +136,9 @@ exports.getOverview = async (req, res) => {
       }
       return res.status(200).json({ data: content });
     } else {
+      console.log(`\nCompact status request attempt - key is incorrect : \n - Expected : ${data}\n - Received : ${key}`);
       return res.status(401).json({ data: { "status": "access denied" } });
     }
-    console.log(`\nOverview request attempt - key is ${keyIsValid ? null : "in"}correct${keyIsValid ? "." : ` : \n - Expected : ${data}\n - Received : ${key}`}`);
   } catch (error) {
     console.log(error.message);
     return res.status(401).json({ error: error.message });
