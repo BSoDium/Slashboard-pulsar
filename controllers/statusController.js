@@ -102,9 +102,9 @@ exports.getStatus = async (req, res) => {
       }
       return res.status(200).json({ data: content });
     } else {
+      console.log(`\nStatus request attempt - key is incorrect : \n - Expected : ${data}\n - Received : ${key}`);
       return res.status(401).json({ data: { "status": "access denied" } });
     }
-    console.log(`\nStatus request attempt - key is ${keyIsValid ? null : "in"}correct${keyIsValid ? "." : ` : \n - Expected : ${data}\n - Received : ${key}`}`);
   } catch (error) {
     console.log(error.message);
     return res.status(401).json({ error: error.message });

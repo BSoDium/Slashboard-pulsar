@@ -25,7 +25,14 @@ echo Successfully written to file.
 echo Your key is : $key
 echo It can be later found in the key.txt file located in the root of the project.
 
-pm2 start ../index.js
+# cd to the root of the project
+cd ..
+# install dependencies
+npm i
+# allow port through firewall
+sudo ufw allow 6033
+# daemonize the node app
+pm2 start ../index.js --env production --name "pulsar"
 echo Pulsar is now starting up...
 
 echo Do you want pulsar to run on system startup [Y/n] ?
