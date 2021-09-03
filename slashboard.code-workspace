@@ -5,9 +5,9 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["desktop-client", "pulsar"],
+    "conventionalCommits.scopes": ["desktop-client", "pulsar", "deps"],
     "git.ignoreLimitWarning": true,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "launch": {
     "version": "0.2.0",

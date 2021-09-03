@@ -8,7 +8,7 @@
 
 h1 {
   font-size: 2em;
-  font-weight: 400;
+  font-weight: 350;
   text-transform: uppercase;
   margin: 0;
 }
@@ -61,4 +61,19 @@ h3 {
 .t-select {
   margin: 10px 0px;
   color: #fff;
+}
+
+.t-impact,
+.t-impact-min {
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+}
+
+.t-impact {
+  font-size: 3em;
+}
+
+.t-impact-min {
+  font-size: 1.5em;
 }

@@ -14,9 +14,7 @@ interface Props {
   token: HandlerToken;
 }
 
-interface State {}
-
-class DelDeviceModal extends React.Component<Props, State> {
+class DelDeviceModal extends React.Component<Props, {}> {
   render() {
     const { token } = this.props;
     return (

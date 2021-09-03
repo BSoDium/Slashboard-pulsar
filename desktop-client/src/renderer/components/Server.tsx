@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import LoadingSkeleton from 'renderer/components/loading/LoadingSkeleton';
-import serverIcon from 'renderer/assets/server.svg';
-import pcIcon from 'renderer/assets/pc.svg';
-import phoneIcon from 'renderer/assets/smartphone.svg';
+import serverIcon from 'renderer/assets/hardware/server.svg';
+import pcIcon from 'renderer/assets/hardware/pc.svg';
+import phoneIcon from 'renderer/assets/hardware/smartphone.svg';
 import ModalHandler, {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';

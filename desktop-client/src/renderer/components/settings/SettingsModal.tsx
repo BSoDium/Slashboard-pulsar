@@ -14,9 +14,7 @@ interface Props {
   token: HandlerToken;
 }
 
-interface State {}
-
-export default class SettingsModal extends React.Component<Props, State> {
+export default class SettingsModal extends React.Component<Props, {}> {
   render() {
     const { token } = this.props;
     return (

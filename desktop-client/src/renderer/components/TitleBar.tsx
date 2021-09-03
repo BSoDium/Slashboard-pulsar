@@ -3,14 +3,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
-interface Props {}
-
 interface State {
   fullscreen: boolean;
 }
 
-class TitleBar extends React.Component<Props, State> {
-  constructor(props: Props | Readonly<Props>) {
+class TitleBar extends React.Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       fullscreen: false, // should be set by electron
@@ -34,7 +32,7 @@ class TitleBar extends React.Component<Props, State> {
               window.electron.ipcRenderer.currentWindow.minimize();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} color="rgb(10, 163, 22)" />
+            <FontAwesomeIcon icon={faCircle} className="titlebar-minimize" />
           </button>
           <button
             type="button"
@@ -43,7 +41,7 @@ class TitleBar extends React.Component<Props, State> {
               window.electron.ipcRenderer.currentWindow.maximize();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} color="rgb(226, 178, 19)" />
+            <FontAwesomeIcon icon={faCircle} className="titlebar-maximize" />
           </button>
           <button
             type="button"
@@ -52,7 +50,7 @@ class TitleBar extends React.Component<Props, State> {
               window.electron.ipcRenderer.currentWindow.close();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} color="red" />
+            <FontAwesomeIcon icon={faCircle} className="titlebar-close" />
           </button>
         </div>
       </div>

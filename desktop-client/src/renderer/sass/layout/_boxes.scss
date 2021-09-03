@@ -16,8 +16,14 @@
   padding: 20px;
 }
 
-.title-row {
+.flex-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
   flex-wrap: nowrap;
 }

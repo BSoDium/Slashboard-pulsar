@@ -1,17 +1,15 @@
 import React from 'react';
 
-interface ModalHeaderProps {
+interface Props {
   children?: JSX.Element | JSX.Element[] | string;
   style?: React.CSSProperties;
 }
 
-interface ModalHeaderState {}
-
-class ModalHeader extends React.Component<ModalHeaderProps, ModalHeaderState> {
+class ModalHeader extends React.Component<Props, {}> {
   static defaultProps = {
     shadow: false,
   };
-  constructor(props: ModalHeaderProps) {
+  constructor(props: Props) {
     super(props);
   }
 

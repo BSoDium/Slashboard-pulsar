@@ -7,9 +7,7 @@ interface Props {
   offline: CompactState;
 }
 
-interface State {}
-
-class ControlPanel extends React.Component<Props, State> {
+class ControlPanel extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
     this.state = {};

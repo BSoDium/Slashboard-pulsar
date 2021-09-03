@@ -1,20 +1,18 @@
 import React from 'react';
 
-interface ModalProps {
+interface Props {
   shadow?: boolean;
   height?: string;
   width?: string;
   children?: JSX.Element | JSX.Element[];
 }
 
-interface ModalState {}
-
-class Modal extends React.Component<ModalProps, ModalState> {
+class Modal extends React.Component<Props, {}> {
   static defaultProps = {
     shadow: false,
     children: null,
   };
-  constructor(props: ModalProps) {
+  constructor(props: Props) {
     super(props);
   }
 

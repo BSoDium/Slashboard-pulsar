@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
-import Console from 'renderer/components/stats/Console';
-import LoadingSpinner from '../loading/LoadingSpinner';
+import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
+import DeviceInfo from 'renderer/components/stats/DeviceInfo';
 
 import { InvalidKey, Unresponsive } from 'renderer/components/ContextMessages';
 
 interface State {
   isLoading: boolean;
-  response: any;
+  response: PulsarResponse | undefined;
+  fetchFailed: boolean;
 }
 
 class ServerStats extends React.Component<any, State> {
@@ -27,7 +28,8 @@ class ServerStats extends React.Component<any, State> {
     super(props);
     this.state = {
       isLoading: true,
-      response: null,
+      response: undefined,
+      fetchFailed: false,
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -36,12 +38,12 @@ class ServerStats extends React.Component<any, State> {
     const url = `http://${ip}:${port}/${auth}/status`;
     fetch(url)
       .then((response) => response.json())
-      .then((response) => {
+      .then((response: PulsarResponse) => {
         this.setState({ response, isLoading: false });
         return response;
       })
       .catch(() => {
-        this.setState({ response: 'none', isLoading: false });
+        this.setState({ isLoading: false, fetchFailed: true });
       });
   }
 
@@ -60,10 +62,10 @@ class ServerStats extends React.Component<any, State> {
   }
 
   render() {
-    const { isLoading, response } = this.state;
-    const serverTimedOut = isLoading ? undefined : response.data === undefined;
+    const { isLoading, response, fetchFailed } = this.state;
+    const serverTimedOut = isLoading ? undefined : fetchFailed;
     const authFailed =
-      !isLoading && !serverTimedOut && response.data.status !== 'active';
+      !isLoading && !serverTimedOut && response?.data.status !== 'active';
 
     let content: JSX.Element;
     if (serverTimedOut) {
@@ -79,19 +81,38 @@ class ServerStats extends React.Component<any, State> {
         <div className="server-stats-wrapper">
           <div className="server-stats-titlebar">
             <div className="title-box">
-              <h1>{response.data.name}</h1>
+              <h1>{response?.data.name}</h1>
               <h2>
                 {ip}:{port}
               </h2>
             </div>
           </div>
           <div className="server-stats-content">
-            <CPUChart coreStates={response.data.hardware.cpus} duration={100} />
-            <RAMChart
-              memoryState={response.data.hardware.memory}
-              duration={100}
-            />
-            <Console />
+            <DeviceInfo data={response?.data!} />
+            <div className="server-stats-charts">
+              <div className="chart-group">
+                <CPUChart
+                  coreStates={[response?.data.hardware.cpu.global!]}
+                  duration={50}
+                  title="CPU"
+                  subtitle="Average load"
+                  stroke="#2effff"
+                />
+                <CPUChart
+                  coreStates={response?.data.hardware.cpu.cores!}
+                  duration={50}
+                  title="CPU"
+                  subtitle="Core load"
+                />
+                <RAMChart // I need to somehow merge the memory and cpu charts into one component
+                  memoryState={response?.data.hardware.memory!}
+                  duration={50}
+                  stroke="#ff2e2e"
+                />
+                {/* <TempCharts /> */}
+              </div>
+            </div>
+            {/* <Console /> */}
           </div>
         </div>
       );

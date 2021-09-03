@@ -2,11 +2,7 @@ import React from 'react';
 import { ReactTerminal } from 'react-terminal'; // remember to remove this
 // import Terminal from 'terminal-in-react'; // and this
 
-interface Props {}
-
-interface State {}
-
-class Console extends React.Component<Props, State> {
+class Console extends React.Component<{}, {}> {
   render() {
     return (
       <div className="terminal-wrapper">

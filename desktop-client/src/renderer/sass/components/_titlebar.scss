@@ -17,14 +17,34 @@
   flex-wrap: nowrap;
 }
 .titlebar-control-button {
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.493);
-    transition: background-color 0.2s;
-  }
   background-color: rgba(255, 255, 255, 0);
   margin: 2px;
   width: max-content;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.titlebar-minimize {
+  &:hover {
+    color: rgb(10, 163, 22);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
+}
+
+.titlebar-maximize {
+  &:hover {
+    color: rgb(226, 178, 19);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
+}
+
+.titlebar-close {
+  &:hover {
+    color: rgb(226, 19, 19);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
 }
