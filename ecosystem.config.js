@@ -4,7 +4,7 @@ module.exports = {
       name: "Pulsar",
       script: "./index.js",
       watch: true,
-      env: {
+      env_development: {
         "PORT": 5000,
         "NODE_ENV": "development",
       },
