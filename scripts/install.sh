@@ -32,7 +32,7 @@ npm i
 # allow port through firewall
 sudo ufw allow 6033
 # daemonize the node app
-pm2 start ../index.js --env production --name "pulsar"
+pm2 start index.js --env production --name "pulsar"
 echo Pulsar is now starting up...
 
 echo Do you want pulsar to run on system startup [Y/n] ?
