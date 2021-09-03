@@ -13,18 +13,6 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Run Desktop client",
-        "type": "pwa-node",
-        "request": "launch",
-        "cwd": "${workspaceRoot}/desktop-client",
-        "args": ["start"],
-        "runtimeExecutable": "yarn",
-        "resolveSourceMapLocations": [
-          "${workspaceFolder}/",
-          "!/node_modules/**"
-        ]
-      },
-      {
         "name": "Run Pulsar",
         "type": "pwa-node",
         "request": "launch",
