@@ -1,16 +1,14 @@
 const express = require("express");
-const formidable = require("express-formidable");
-const cors = require("cors");
+const compression = require("compression");
 const helmet = require("helmet");
 
 require("dotenv").config();
 
 const app = express();
-app.use(formidable());
-app.use(cors());
 app.use(helmet());
+app.use(compression());
 
-const routes = require('./routes/routes.js');
+const routes = require("./routes/routes.js");
 app.use(routes);
 
 app.all("*", (req, res) => {
