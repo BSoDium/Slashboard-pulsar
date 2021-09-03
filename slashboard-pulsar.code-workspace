@@ -5,7 +5,7 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["desktop-client", "pulsar", "deps"],
+    "conventionalCommits.scopes": ["pulsar", "deps"],
     "git.ignoreLimitWarning": true,
     "editor.formatOnSave": true
   },
@@ -17,9 +17,9 @@
         "type": "pwa-node",
         "request": "launch",
         "skipFiles": ["<node_internals>/**"],
-        "cwd": "${workspaceRoot}/pulsar",
-        "program": "${workspaceRoot}/pulsar/index.js",
-        "__workspaceFolder": "${workspaceRoot}/pulsar"
+        "cwd": "${workspaceRoot}",
+        "program": "${workspaceRoot}/index.js",
+        "__workspaceFolder": "${workspaceRoot}"
       }
     ]
   }

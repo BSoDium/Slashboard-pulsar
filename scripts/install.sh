@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 echo Thank you for installing Pulsar-slashboard
 echo this script will daemonize the node js app and run it.
 
@@ -21,6 +22,8 @@ else
 fi
 echo $key > ../key.txt
 echo Successfully written to file.
+echo Your key is : $key
+echo It can be later found in the key.txt file located in the root of the project.
 
 pm2 start ../index.js
 echo Pulsar is now starting up...
