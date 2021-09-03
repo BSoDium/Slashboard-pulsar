@@ -30,70 +30,71 @@ declare global {
   }
 
   interface NetworkInterface {
-    address: string,
-    netmask: string,
-    family: string,
-    mac: string,
-    internal: boolean,
-    cidr: string,
-    scopeid: string
+    address: string;
+    netmask: string;
+    family: string;
+    mac: string;
+    internal: boolean;
+    cidr: string;
+    scopeid: string;
   }
 
   interface PulsarResponse {
     data: {
-      status: string,
-      name: string,
-      os : {
-        type: string,
-        platform: string,
-        architechture: string,
-        release: string,
-      },
+      status: string;
+      name: string;
+      os: {
+        type: string;
+        platform: string;
+        architecture: string;
+        release: string;
+        uptime: number;
+      };
       hardware: {
         cpu: {
-          cores : Array<{
-            model: string,
-            speed: number,
-            load: number,
-          }>,
+          cores: Array<{
+            model: string;
+            speed: number;
+            load: number;
+          }>;
           global: {
-            model: string,
-            speed: number,
-            load: number,
-          },
-        },
+            model: string;
+            speed: number;
+            load: number;
+          };
+        };
         memory: {
-          total: number,
-          free: number,
-        }
+          total: number;
+          free: number;
+        };
         network: {
           interfaces: {
-            [key: string]: NetworkInterface          
-          }
-        }
+            [key: string]: NetworkInterface[];
+          };
+        };
         disks: Array<{
-          _filesystem: string,
-          _blocks: number,
-          _used: number,
-          _available: number,
-          _capacity: string,
-          _mounted: string,
-        }>
-      }
-    }
+          _filesystem: string;
+          _blocks: number;
+          _used: number;
+          _available: number;
+          _capacity: string;
+          _mounted: string;
+        }>;
+      };
+    };
   }
 
   interface CompactPulsarResponse {
     data: {
-      status: string,
-      name: string,
-      os : {
-        type: string,
-        platform: string,
-        architechture: string,
-        release: string,
-      },
-    }
+      status: string;
+      name: string;
+      os: {
+        type: string;
+        platform: string;
+        architechture: string;
+        release: string;
+      };
+    };
   }
 }
 export {};

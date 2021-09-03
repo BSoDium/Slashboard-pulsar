@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
-import Hardware from 'renderer/components/stats/Hardware';
+import DeviceInfo from 'renderer/components/stats/DeviceInfo';
 
 import { InvalidKey, Unresponsive } from 'renderer/components/ContextMessages';
 
@@ -88,7 +88,7 @@ class ServerStats extends React.Component<any, State> {
             </div>
           </div>
           <div className="server-stats-content">
-            <Hardware data={response?.data.hardware!} />
+            <DeviceInfo data={response?.data!} />
             <div className="server-stats-charts">
               <div className="chart-group">
                 <CPUChart
@@ -96,6 +96,7 @@ class ServerStats extends React.Component<any, State> {
                   duration={50}
                   title="CPU"
                   subtitle="Average load"
+                  stroke="#2effff"
                 />
                 <CPUChart
                   coreStates={response?.data.hardware.cpu.cores!}
@@ -106,6 +107,7 @@ class ServerStats extends React.Component<any, State> {
                 <RAMChart // I need to somehow merge the memory and cpu charts into one component
                   memoryState={response?.data.hardware.memory!}
                   duration={50}
+                  stroke="#ff2e2e"
                 />
                 {/* <TempCharts /> */}
               </div>

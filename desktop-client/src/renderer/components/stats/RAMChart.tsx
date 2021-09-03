@@ -11,6 +11,7 @@ interface Props {
     free: number;
   };
   duration: number;
+  stroke: string;
 }
 
 /**
@@ -36,7 +37,7 @@ class RAMChart extends React.Component<Props, {}> {
   }
 
   render() {
-    const { memoryState } = this.props;
+    const { memoryState, stroke } = this.props;
 
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
@@ -50,7 +51,7 @@ class RAMChart extends React.Component<Props, {}> {
       data: this.data.toArray(),
       style: {
         cursor: 'auto',
-        stroke: '#ff2e2e',
+        stroke,
         strokeWidth: 2,
         strokeOpacity: 1,
         shapeRendering: 'geometricPrecision',

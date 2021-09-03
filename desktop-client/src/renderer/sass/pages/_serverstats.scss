@@ -53,10 +53,10 @@
   display: grid;
   // display two elements stacked upon each other on the left, and one element on the right
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
   grid-template-areas:
     'cpu disk'
-    'net disk';
+    'os disk';
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   margin: 10px 0px;
@@ -75,24 +75,23 @@
   height: fit-content;
 }
 
-.disk-explorer {
+.explorer {
+  box-sizing: border-box;
   margin: 15px;
   padding: 5px;
   overflow: auto;
-  max-height: 250px;
 }
 
-.disk-explorer-item {
+.explorer-item {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.466);
 }
 
-.disk-explorer-item-description {
+.explorer-item-description {
   margin: 0px 30px;
 }
 

@@ -15,6 +15,7 @@ interface Props {
   duration: number;
   title: string;
   subtitle: string;
+  stroke?: string; // if not set, will be generated
 }
 
 interface State {
@@ -51,7 +52,7 @@ class CPUChart extends React.Component<Props, State> {
   }
 
   render() {
-    const { coreStates, title, subtitle } = this.props;
+    const { coreStates, title, subtitle, stroke } = this.props;
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
     for (let i = 0; i < this.data.length; i++) {
@@ -67,7 +68,7 @@ class CPUChart extends React.Component<Props, State> {
         data: this.data[i].toArray(),
         style: {
           cursor: 'auto',
-          stroke: ColorGen.generate(i),
+          stroke: stroke || ColorGen.generate(i),
           strokeWidth: 2,
           strokeOpacity: 1,
           shapeRendering: 'geometricPrecision',

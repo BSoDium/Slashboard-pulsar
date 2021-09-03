@@ -51,7 +51,7 @@ class InfoModal extends React.Component<Props, State> {
           }}
         >
           <div className="spacer">
-            <div className="title-row">
+            <div className="flex-row">
               <img
                 src={logo}
                 alt="Slashboard-logo"
