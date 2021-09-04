@@ -16,10 +16,13 @@
         "name": "Run Pulsar",
         "type": "pwa-node",
         "request": "launch",
-        "skipFiles": ["<node_internals>/**"],
         "cwd": "${workspaceRoot}",
-        "program": "${workspaceRoot}/index.js",
-        "__workspaceFolder": "${workspaceRoot}"
+        "args": ["nodemon", "start"],
+        "runtimeExecutable": "npx",
+        "resolveSourceMapLocations": [
+          "${workspaceFolder}/",
+          "!/node_modules/**"
+        ]
       }
     ]
   }
