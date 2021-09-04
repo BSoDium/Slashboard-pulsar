@@ -22,27 +22,27 @@ else
 fi
 printf $key > ../key.txt
 echo "Successfully written to file."
-echo "+------------------------------------------------------------------------------ +"
+echo "+-------------------------------------------------------------------------------+"
 echo "| Your key is : $key"
 echo "| It can be later found in the key.txt file located in the root of the project."
-echo "+------------------------------------------------------------------------------ +"
+echo "+-------------------------------------------------------------------------------+"
 # cd to the root of the project
 cd ..
 # install dependencies
 npm i
 
 # allow port through firewall
-echo Allowing port 6033 through firewall
+echo "Allowing port 6033 through firewall"
 sudo ufw allow 6033
 # daemonize the node app
-echo Pulsar is now starting up...
+echo "Pulsar is now starting up..."
 pm2 start ecosystem.config.js --env production
 
-echo Do you want pulsar to run on system startup [Y/n] ?
+echo "Do you want pulsar to run on system startup [Y/n] ?"
 read choice
 if [ $choice == "Y" -o $choice == "y" ]
 then
-  echo [Pulsar] Please follow the instructions displayed by the pm2 startup manager :
+  echo "\e[32m[Pulsar] \e[39mPlease follow the instructions displayed by the pm2 startup manager :"
   pm2 startup
 else
   echo Done.
