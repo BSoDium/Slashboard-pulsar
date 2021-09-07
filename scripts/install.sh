@@ -6,8 +6,8 @@ echo "this script will daemonize the node js app and run it."
 
 # install pm2
 echo "Setting up pm2..."
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
 npm install pm2 -g || echo "There seems to be a problem with your node installation, the script failed to install pm2"; sudo apt install nodejs npm -y; npm install pm2 -g
 

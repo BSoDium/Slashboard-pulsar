@@ -18,5 +18,6 @@ echo "Restoring the key file..."
 cp ../../key.txt.bak ../key.txt
 
 echo "Starting Pulsar..."
-pm2 start ../ecosystem.config.js --env production
+cd ..
+pm2 start ecosystem.config.js --env production
 echo "Done!"
