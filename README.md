@@ -17,7 +17,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
 - Run the installation script for your OS (only available for linux at the moment)
   
   ```sh
-  sudo ./scripts/install.sh
+  ./scripts/install.sh
   ```
   This script will : 
    - setup nodejs if necessary
@@ -89,7 +89,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
   
   Simply run :
   ```sh
-  sudo ./scripts/uninstall.sh
+  ./scripts/uninstall.sh
   ```
   
   or :
