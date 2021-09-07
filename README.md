@@ -3,6 +3,7 @@
 
 A lightweight node js app designed to work with [the Slashboard desktop client](https://github.com/l3alr0g/Slashboard-desktop)
 
+> Built using Node.js
 <br/>
  
 ## Installation
