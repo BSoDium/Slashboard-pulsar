@@ -6,7 +6,10 @@ echo "this script will daemonize the node js app and run it."
 
 # install pm2
 echo "Setting up pm2..."
-npm install pm2 -g || echo "there seems to be a problem with your node installation, the script failed to install pm2"; sudo apt install nodejs npm -y; npm install pm2 -g
+sudo apt-get update
+sudo apt-get upgrade
+
+npm install pm2 -g || echo "There seems to be a problem with your node installation, the script failed to install pm2"; sudo apt install nodejs npm -y; npm install pm2 -g
 
 echo "Your server will be given a pairing key,"
 echo "you can enter a key of your choice or let the script generate it randomly."

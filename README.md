@@ -1,5 +1,9 @@
 # Slashboard Pulsar
- A lightweight node js app designed to work with [the Slashboard desktop client](https://github.com/l3alr0g/Slashboard-desktop)
+<img src="https://raw.githubusercontent.com/l3alr0g/Slashboard-pulsar/main/assets/icon.png" alt="Logo" width="100" align="left" />
+
+A lightweight node js app designed to work with [the Slashboard desktop client](https://github.com/l3alr0g/Slashboard-desktop)
+
+<br/>
  
 ## Installation
 - Clone this repository somewhere safe on your server (`/var/www` is often a good choice)

@@ -1,7 +1,8 @@
 const os = require('os');
 const fs = require('fs')
 const dInf = require('node-disk-info');
-var exec = require('child_process').exec;
+const exec = require('child_process').exec;
+const pjson = require('../package.json');
 
 function execute(command, callback) {
   exec(command, function (error, stdout, stderr) { callback(stdout); });
@@ -71,6 +72,7 @@ exports.getStatus = async (req, res) => {
       const content = {
         "status": "active",
         "name": os.hostname(),
+        "version": pjson.version,
         "os": {
           "type": os.type(),
           "platform": os.platform(),
