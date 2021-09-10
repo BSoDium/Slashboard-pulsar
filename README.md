@@ -70,6 +70,12 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     ```cmd
     npm install pm2 -g
     ```
+    
+  - Install pm2-windows-startup
+    ```cmd
+    npm install pm2-windows-startup -g
+    pm2-startup install
+    ```
   
   - Open key.txt with your favorite editor, delete the default key and write your own.
     > Warning : no special characters allowed, only alphanumeric characters. Example : `CRml6VcWMGlH8UQ1XjintL1Tu71IA5ktbA5I8g0HzwrhF4E0hNE50O1ep7W2eNOu`
@@ -79,9 +85,9 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     pm2 start ecosystem.config.js --env production
     ```
   
-  - Tell pm2 to run it on system startup :
+  - Setup pm2 to relaunch the app on system startup :
     ```cmd
-    pm2 startup # execute the command pm2 gives you
+    pm2 save
     ```
 
 ## Accessing your server from anywhere on the internet
