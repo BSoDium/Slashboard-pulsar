@@ -14,6 +14,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
   git clone https://github.com/l3alr0g/Slashboard-pulsar.git
   ```
 
+### Automated installation (Linux only)
 - Run the installation script for your OS (only available for linux at the moment)
   
   ```sh
