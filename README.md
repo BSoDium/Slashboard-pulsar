@@ -16,6 +16,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
   
 - Install all the necessary dependencies
   ```sh
+  cd Slashboard-pulsar
   npm install
   ```
 
