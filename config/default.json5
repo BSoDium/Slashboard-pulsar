@@ -1,0 +1,16 @@
+{
+    "server": {
+        "port": 5000
+    },
+    "security": {
+        /* You should insert your shared key in here it's used to sign jwt tokens for this server */
+        "serverKey": "changeme",
+        /* Here you should put your server username */
+        "username": "exampleUser",
+        /* Server password */
+        "password": "changeme",
+        /* How long a jwt is valid for, maximum value of 259200 */
+        /* Should you need to invalidate tokens before they expire change the serverKey above */
+        "jwtLifetime": 3600
+    }
+}
