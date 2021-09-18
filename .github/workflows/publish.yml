@@ -42,15 +42,15 @@ jobs:
         run: |
           npm install
 
-      - name: Build image
-        run: |
-          docker build -t l3alr0g/slashboard-pulsar .
-      
       - name: Login to DockerHub
         env:
           TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           echo ${{ env.TOKEN }} | docker login -u l3alr0g --password-stdin
+          
+      - name: Build image
+        run: |
+          docker build -t l3alr0g/slashboard-pulsar .
 
       - name: Push to DockerHub
         run: |
