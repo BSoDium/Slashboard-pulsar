@@ -28,7 +28,7 @@ exports.getStatus = async (req, res) => {
             return res.status(500).json({error: DiskError.message});
         }
 
-        if (Citadel.checkJWT(req.headers["Authorization"] || "", appContext.hostname, c.get("security.serverKey"))) {
+        if (Citadel.checkJWT(req.headers["Authorization"] || "", appContext.hostname, appContext.serverKey)) {
 
             let cpuModels = [];
 
@@ -108,8 +108,7 @@ exports.getStatus = async (req, res) => {
 exports.getOverview = async (req, res) => {
     try {
         let token = req.headers["authorization"] || "no token";
-        let checkAuth = Citadel.checkJWT(token, appContext.hostname, c.get("security.serverKey"));
-        // console.log(checkAuth, token, JSON.stringify(req.headers), JSON.stringify(appContext));
+        let checkAuth = Citadel.checkJWT(token, appContext.hostname, appContext.serverKey);
         if (checkAuth) {
 
             const content = {

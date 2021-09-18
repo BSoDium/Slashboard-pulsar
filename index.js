@@ -15,6 +15,7 @@ app.use(express.json());
 
 const routes = require("./routes/routes.js");
 const os = require("os");
+const c = require("config");
 app.use(routes);
 
 app.all("*", (req, res) => {
@@ -29,5 +30,6 @@ global.appContext = {
   hashedPassword: cit.encodePasswordSync(config.get("security.password")),
   runId: crypto.randomUUID(),
   hostname: crypto.createHash("sha256").update(os.hostname(), "utf-8").digest("hex"),
+  serverKey: c.get("security.serverKey"),
 };
 module.exports = app;
