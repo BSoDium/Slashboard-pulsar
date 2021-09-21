@@ -27,7 +27,7 @@ app.listen(config.get("server.port") || 5000, () => {
 });
 
 global.appContext = {
-  hashedPassword: cit.encodePasswordSync(config.get("security.password")),
+  sharedSecret: cit.encodePasswordSync(config.get("security.sharedSecret")),
   runId: crypto.randomUUID(),
   hostname: crypto.createHash("sha256").update(os.hostname(), "utf-8").digest("hex"),
   serverKey: c.get("security.serverKey"),

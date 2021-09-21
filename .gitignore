@@ -117,7 +117,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-config/development.jsonc
+config/development.*
+config/dev.*
 
 # editor-specific settings
 .vscode/
