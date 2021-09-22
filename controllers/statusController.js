@@ -3,9 +3,9 @@ const fs = require('fs')
 const dInf = require('node-disk-info');
 const exec = require('child_process').exec;
 const pjson = require('../package.json');
-const {Citadel} = require("../services/citadel");
+const { Citadel } = require("../services/citadel");
 const c = require("config");
-const {json} = require("mocha/lib/reporters");
+const { json } = require("mocha/lib/reporters");
 
 function execute(command, callback) {
     exec(command, function (error, stdout, stderr) {
@@ -14,7 +14,7 @@ function execute(command, callback) {
 };
 
 // as os returns an average since system boot, we need to calculate the average since the last request
-let lastCoresState = {data: os.cpus(), time: Date.now()};
+let lastCoresState = { data: os.cpus(), time: Date.now() };
 
 exports.getStatus = async (req, res) => {
     try {
@@ -25,15 +25,15 @@ exports.getStatus = async (req, res) => {
             disks = dInf.getDiskInfoSync();
         } catch (DiskError) {
             console.error(DiskError.message);
-            return res.status(500).json({error: DiskError.message});
+            return res.status(500).json({ error: DiskError.message });
         }
 
-        if (Citadel.checkJWT(req.headers["Authorization"] || "", appContext.hostname, appContext.serverKey)) {
+        if (Citadel.checkJWT(req.headers["authorization"] || "", appContext.hostname, appContext.serverKey)) {
 
             let cpuModels = [];
 
             // calculate CPU load for each core
-            const currentCoresState = {data: os.cpus(), time: Date.now()};
+            const currentCoresState = { data: os.cpus(), time: Date.now() };
             let cores = os.cpus()
 
             for (let i = 0; i < cores.length; i++) { // we assume the cpu count is constant
@@ -94,14 +94,14 @@ exports.getStatus = async (req, res) => {
                     "disks": disks,
                 },
             }
-            return res.status(200).json({data: content});
+            return res.status(200).json({ data: content });
         } else {
             console.log("Wrong jwt received");
-            return res.status(403).json({data: {"status": "access denied"}});
+            return res.status(403).json({ data: { "status": "access denied" } });
         }
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({error: error.message});
+        return res.status(500).json({ error: error.message });
     }
 }
 
@@ -121,13 +121,13 @@ exports.getOverview = async (req, res) => {
                     "release": os.release(),
                 }
             }
-            return res.status(200).json({data: content});
+            return res.status(200).json({ data: content });
         } else {
             console.log("Wrong jwt received");
-            return res.status(403).json({data: {"status": "access denied"}});
+            return res.status(403).json({ data: { "status": "access denied" } });
         }
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({error: error.message});
+        return res.status(500).json({ error: error.message });
     }
 }
