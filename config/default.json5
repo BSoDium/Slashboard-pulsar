@@ -1,0 +1,19 @@
+{
+  security: {
+    /**
+     * You should insert your shared key in here in base64 encoding it's used to sign jwt tokens for this server **Keep this one secret**
+     * To generate it you can use `openssl rand -base64 32` on most linux/unix/mac hosts, see readme for windows instructions.
+     */
+    serverKey: "changeme",
+    /**
+     * This is the shared secret what you use to authenticate your client(s), it is good practice to change this once in a while :^)
+     * To generate it you can use `openssl rand -hex 32` on most linux/unix/mac hosts, see readme for windows instructions.
+     */
+    sharedSecret: "changeme",
+    /**
+     * How long a jwt is valid for, maximum value of 259200
+     * Should you need to invalidate tokens before they expire change the serverKey above
+     */
+    jwtLifetime: 3600,
+  },
+}
