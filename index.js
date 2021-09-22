@@ -15,21 +15,20 @@ app.use(express.json());
 
 const routes = require("./routes/routes.js");
 const os = require("os");
-const c = require("config");
 app.use(routes);
 
 app.all("*", (req, res) => {
   return res.status(404).json({ error: "Page Not Found" });
 });
 
-app.listen(config.get("server.port") || 5000, () => {
-  console.log(`Server has started on port ${config.get("server.port") || 5000}`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server has started on port ${process.env.PORT || 5000}`);
 });
 
 global.appContext = {
   sharedSecret: cit.encodePasswordSync(config.get("security.sharedSecret")),
   runId: crypto.randomUUID(),
   hostname: crypto.createHash("sha256").update(os.hostname(), "utf-8").digest("hex"),
-  serverKey: c.get("security.serverKey"),
+  serverKey: config.get("security.serverKey"),
 };
 module.exports = app;

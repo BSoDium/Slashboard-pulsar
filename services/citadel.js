@@ -1,7 +1,6 @@
 const crypto = require('node:crypto');
 const util = require('node:util');
 const jwt = require("jsonwebtoken");
-const c = require('config');
 
 const scryptPromise = util.promisify(crypto.scrypt);
 
