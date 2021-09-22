@@ -27,7 +27,7 @@ body:
     attributes:
       label: How can we reproduce it ?
       description: Steps to reproduce the behavior
-      placeholder: Go to settings, click on ...
+      placeholder: Restart the server, click on ...
     validations:
       required: true
 
