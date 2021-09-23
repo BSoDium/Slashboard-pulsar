@@ -1,7 +1,7 @@
 {
   "name": "pulsar",
   "productName": "Pulsar",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "A tiny nodejs server to monitor your server's performance live.",
   "main": "index.js",
   "scripts": {
