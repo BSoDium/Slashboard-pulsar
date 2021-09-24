@@ -1,8 +1,7 @@
 const app = require('../index');
-const fs = require('fs')
 const request = require("supertest");
-const { response } = require('../index');
 const backend = request(app);
+const config = require("config");
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -22,39 +21,68 @@ describe('statusController.js tests', function () {
   /** 
    * Test for the API route that returns the status of the server.
    */
-  describe('getStatus tests', () => {
-    before('Read key from file, got two responses', async function () {
-      let key;
-      try {
-        key = fs.readFileSync('./key.txt', 'utf8');
-      }
-      catch (FileError) {
-        console.error(FileError.message);
-      }
-      response.valid = await backend.get(`/${key}/status`)
-      response.invalid = await backend.get(`/${key}eetyvgzk10/status`)
-      return response;
+  describe('getStatusCompact tests', () => {
+    before('Fetch bearer, perform get request with both correct and incorrect bearer', async function () {
+      // retrieve bearer
+      const bearerResponse = await backend.post('/authenticate/jwt').set('Content-Type', 'application/json').send({
+        auth: config.get('security.sharedSecret')
+      });
+
+      responses.valid = await backend.get(`/status-compact`).set('Authorization', `Bearer ${bearerResponse.body.bearer}`);
+      responses.invalid = await backend.get(`/status-compact`).set('Authorization', `Bearer ${bearerResponse.body.bearer + 'a'}`);
     });
-    it('Response OK', () => {
-      response.valid.status.should.equal(200);
-      response.invalid.status.should.equal(401);
+    it('Security OK', () => {
+      responses.valid.status.should.equal(200);
+      responses.invalid.status.should.equal(403);
     });
 
     it('Response status check', () => {
-      response.valid.body.data.status.should.equal("active");
-      response.invalid.body.data.status.should.equal("access denied");
+      responses.valid.body.data.status.should.equal("active");
+      responses.invalid.body.data.status.should.equal("access denied");
     });
 
-    it('Payload check - valid response', () => {
-      response.valid.body.data.hasOwnProperty("name").should.equal(true);
-      response.valid.body.data.hasOwnProperty("os").should.equal(true);
-      response.valid.body.data.hasOwnProperty("hardware").should.equal(true);
+    it('Payload check - valid responses', () => {
+      responses.valid.body.data.hasOwnProperty("name").should.equal(true);
+      responses.valid.body.data.hasOwnProperty("os").should.equal(true);
     });
 
-    it('Payload check - invalid response', () => {
-      response.invalid.body.data.hasOwnProperty("name").should.equal(false);
-      response.invalid.body.data.hasOwnProperty("os").should.equal(false);
-      response.invalid.body.data.hasOwnProperty("hardware").should.equal(false);
+    it('Payload check - invalid responses', () => {
+      responses.invalid.body.data.hasOwnProperty("name").should.equal(false);
+      responses.invalid.body.data.hasOwnProperty("os").should.equal(false);
+    });
+  });
+
+  describe('getStatus tests', () => {
+    before('Fetch bearer, perform get request with both correct and incorrect bearer', async function () {
+      // retrieve bearer
+      const bearerResponse = await backend.post('/authenticate/jwt').set('Content-Type', 'application/json').send({
+        auth: config.get('security.sharedSecret')
+      });
+
+      // only works with status-compact atm
+      responses.valid = await backend.get(`/status`).set('authorization', `Bearer ${bearerResponse.body.bearer}`);
+      responses.invalid = await backend.get(`/status`).set('authorization', `Bearer ${bearerResponse.body.bearer + 'a'}`);
+    });
+    it('Security OK', () => {
+      responses.valid.status.should.equal(200);
+      responses.invalid.status.should.equal(403);
+    });
+
+    it('Response status check', () => {
+      responses.valid.body.data.status.should.equal("active");
+      responses.invalid.body.data.status.should.equal("access denied");
+    });
+
+    it('Payload check - valid responses', () => {
+      responses.valid.body.data.hasOwnProperty("name").should.equal(true);
+      responses.valid.body.data.hasOwnProperty("os").should.equal(true);
+      responses.valid.body.data.hasOwnProperty("hardware").should.equal(true);
+    });
+
+    it('Payload check - invalid responses', () => {
+      responses.invalid.body.data.hasOwnProperty("name").should.equal(false);
+      responses.invalid.body.data.hasOwnProperty("os").should.equal(false);
+      responses.invalid.body.data.hasOwnProperty("hardware").should.equal(false);
     });
   });
 });

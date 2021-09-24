@@ -116,3 +116,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+config/development.*
+config/dev.*
+
+# editor-specific settings
+.vscode/
+.idea/
