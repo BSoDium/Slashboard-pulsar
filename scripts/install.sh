@@ -30,7 +30,7 @@ printf "{security: {serverKey: \"$serverKey\", sharedSecret: \"$sharedSecret\", 
 echo "Successfully written to file."
 echo "+-------------------------------------------------------------------------------+"
 echo "| Your key is : $sharedSecret"
-echo "| It can be later found in the key.txt file located in the root of the project."
+echo "| It can be later found in the configuration file located at config/default.json5"
 echo "+-------------------------------------------------------------------------------+"
 # cd to the root of the project
 cd ..
