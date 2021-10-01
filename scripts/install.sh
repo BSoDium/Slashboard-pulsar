@@ -13,21 +13,24 @@ npm install pm2 -g || echo "There seems to be a problem with your node installat
 
 echo "Your server will be given a pairing key,"
 echo "you can enter a key of your choice or let the script generate it randomly."
+
+serverKey=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)
+
 echo "Do you want to auto-generate it [Y/n] ?"
 read choice
 if [ $choice == "Y" -o $choice == "y" ]
 then
     echo "Generating random 64-char alphanumeric key."
-    key=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)
+    sharedSecret=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)
 else
     echo "Please provide the key of your choice : "
-    read key
+    read sharedSecret
 fi
-printf $key > ../key.txt
+printf "{security: {serverKey: \"$serverKey\", sharedSecret: \"$sharedSecret\", jwtLifetime: 3600}}" > ../config/default.json5
 echo "Successfully written to file."
 echo "+-------------------------------------------------------------------------------+"
-echo "| Your key is : $key"
-echo "| It can be later found in the key.txt file located in the root of the project."
+echo "| Your key is : $sharedSecret"
+echo "| It can be later found in the configuration file located at config/default.json5"
 echo "+-------------------------------------------------------------------------------+"
 # cd to the root of the project
 cd ..
