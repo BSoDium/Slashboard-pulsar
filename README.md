@@ -42,7 +42,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     ```
   - Choose an authentification key and a server-specific secret : 
     ```sh
-    nano config/default.json5
+    nano config/default.json
     ```
     By default, the generated keys are 64 characters long, but you can choose shorter ones.
     When you'll open the file for the first time, The fields will contain the word "default". Erase it and write your key.
@@ -81,7 +81,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     pm2-startup install
     ```
   
-  - Open `config/default.json5` with your favorite editor, delete the default keys and write your own (see linux manual installation for more details).
+  - Open `config/default.json` with your favorite editor, delete the default keys and write your own (see linux manual installation for more details).
     > Warning : no special characters allowed, only alphanumeric characters. Example : `CRml6VcWMGlH8UQ1XjintL1Tu71IA5ktbA5I8g0HzwrhF4E0hNE50O1ep7W2eNOu`
 
   - Start the app:

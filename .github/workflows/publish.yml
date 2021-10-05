@@ -52,10 +52,6 @@ jobs:
         run: |
           echo ${{ env.TOKEN }} | docker login -u l3alr0g --password-stdin
 
-      - name: Build image
-        run: |
-          docker build -t l3alr0g/slashboard-pulsar .
-
       - name: Push to DockerHub
         run: |
           docker push l3alr0g/slashboard-pulsar

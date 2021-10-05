@@ -26,11 +26,11 @@ else
     echo "Please provide the key of your choice : "
     read sharedSecret
 fi
-printf "{security: {serverKey: \"$serverKey\", sharedSecret: \"$sharedSecret\", jwtLifetime: 3600}}" > ../config/default.json5
+printf "{security: {serverKey: \"$serverKey\", sharedSecret: \"$sharedSecret\", jwtLifetime: 3600}}" > ../config/default.json
 echo "Successfully written to file."
 echo "+-------------------------------------------------------------------------------+"
 echo "| Your key is : $sharedSecret"
-echo "| It can be later found in the configuration file located at config/default.json5"
+echo "| It can be later found in the configuration file located at config/default.json"
 echo "+-------------------------------------------------------------------------------+"
 # cd to the root of the project
 cd ..

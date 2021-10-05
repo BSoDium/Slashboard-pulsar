@@ -8,14 +8,14 @@ pm2 stop Pulsar
 pm2 delete Pulsar
 
 echo "Backing up the key file..."
-cp ../config/default.json5 ../../default.json5.bak
+cp ../config/default.json ../../default.json.bak
 
 echo "Pulling from git..."
 git reset --hard
 git pull
 
 echo "Restoring the key file..."
-cp ../../default.json5.bak ../config/default.json5
+cp ../../default.json.bak ../config/default.json
 
 echo "Starting Pulsar..."
 cd ..
