@@ -5,7 +5,11 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["pulsar", "deps"],
+    "conventionalCommits.scopes": [
+      "pulsar",
+      "deps",
+      "docker"
+    ],
     "git.ignoreLimitWarning": true,
     "editor.formatOnSave": true
   },

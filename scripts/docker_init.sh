@@ -33,6 +33,14 @@ if [ $serverKey == "default" ]; then
 		echo "- Using the shared secret provided by the environment variable SHAREDSECRET."
 		sharedSecret=$SHAREDSECRET
 	fi
+
+	# write key to configuration file
+	echo "{\"security\": {\"serverKey\": \"$serverKey\", \"sharedSecret\": \"$sharedSecret\", \"jwtLifetime\": 3600}}" > config/default.json
+
+	separator="----------------------------------------------------------------------------------"
+	echo "The key was successfully saved."
+  printf "$separator\n  Your key is : $sharedSecret\n$separator"
+
 else
 	echo "Using existing configuration."
 fi
