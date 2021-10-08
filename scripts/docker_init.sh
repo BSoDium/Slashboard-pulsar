@@ -39,7 +39,9 @@ if [ $serverKey == "default" ]; then
 
 	separator="----------------------------------------------------------------------------------"
 	echo "The key was successfully saved."
-  printf "$separator\n  Your key is : $sharedSecret\n$separator"
+  echo $separator
+	echo "  Your key is : $sharedSecret"
+	echo $separator
 
 else
 	echo "Using existing configuration."

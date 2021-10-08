@@ -38,17 +38,27 @@ exports.getDiskInfoSync = () => {
     for (const line of lines) {
       const parts = line.split(" ");
       if (parts.length >= 6) {
+        // const disk = {
+        //   device: parts[0],
+        //   mountpoint: parts[1],
+        //   type: parts[2],
+        //   options: parts[3],
+        //   fsck: parts[4],
+        //   mount: parts[5],
+        // };
         const disk = {
-          device: parts[0],
-          mountpoint: parts[1],
-          type: parts[2],
-          options: parts[3],
-          fsck: parts[4],
-          mount: parts[5],
+          _device: parts[0],
+          _filesystem: parts[2],
+          _mounted: parts[1],
+          _blocks: 1000000000,
+          _used: 43,
+          _available: 1000000000,
+          _capacity: "2%",
         };
         disks.push(disk);
       }
     }
+    console.log(disks.length);
     return disks;
   } catch (err) {
     throw err;
