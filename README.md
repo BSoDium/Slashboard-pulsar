@@ -102,7 +102,7 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
 
 ### Docker installation
 
-*Note : This image is still in early access, some features do not fully work as expected.*
+*Note : This image is still in early access, some features might not fully work as expected.*
 
 - Broken on any OS :
   > - Mounted disks view - the ones displayed don't match the host machine's state
