@@ -1,0 +1,93 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v1
+
+      # - name: Create github deployment
+      #   uses: chrnorm/deployment-action@releases/v1
+      #   id: deployment
+      #   with:
+      #     initial_status: "pending"
+      #     token: ${{ github.token }}
+      #     target_url: ${{secrets.DEPLOY_URL}}
+      #     environment: DockerHub
+
+      - name: Install Node.js and NPM
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - uses: actions/cache@v1
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json')}}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies from cache
+        run: |
+          npm install --prefer-offline
+
+      - name: Install dependencies from repository
+        run: |
+          npm install
+
+      - name: Build images
+        run: |
+          docker build -t l3alr0g/slashboard-pulsar .
+          docker build -t ghcr.io/l3alr0g/slashboard-pulsar .
+
+      - name: Login to DockerHub
+        env:
+          TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          echo ${{ env.TOKEN }} | docker login -u l3alr0g --password-stdin
+
+      - name: Push to DockerHub
+        run: |
+          docker push l3alr0g/slashboard-pulsar:latest
+
+      - name: Logout
+        run: |
+          docker logout
+
+      - name: Login to GitHub Packages
+        env:
+          TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          echo ${{ env.TOKEN }} | docker login ghcr.io -u l3alr0g --password-stdin
+
+      - name: Push to GitHub Packages
+        run: |
+          docker push ghcr.io/l3alr0g/slashboard-pulsar:latest
+
+      - name: Logout
+        run: |
+          docker logout
+
+      # - name: Deployment success
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: ${{ github.token }}
+      #     state: "success"
+      #     target_url: ${{ secrets.DEPLOY_URL }}
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+      # - name: Deployment failure
+      #   if: failure()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: ${{ github.token }}
+      #     state: "failure"
+      #     target_url: ${{ secrets.DEPLOY_URL }}
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}

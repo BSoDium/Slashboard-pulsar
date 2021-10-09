@@ -1,0 +1,7 @@
+{
+  "security": {
+    "serverKey": "default",
+    "sharedSecret": "default",
+    "jwtLifetime": 3600
+  }
+}
