@@ -42,7 +42,7 @@ jobs:
         run: |
           npm install
 
-      - name: Build image
+      - name: Build images
         run: |
           docker build -t l3alr0g/slashboard-pulsar .
           docker build -t ghcr.io/l3alr0g/slashboard-pulsar .
