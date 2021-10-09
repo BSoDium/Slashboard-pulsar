@@ -1,12 +1,12 @@
 const os = require("os");
 const fs = require("fs");
-// const dInf = require("node-disk-info");
+const dInf = require("node-disk-info");
 const exec = require("child_process").exec;
 const pjson = require("../package.json");
 const { Citadel } = require("../services/citadel");
 const c = require("config");
 const { json } = require("mocha/lib/reporters");
-const dInf = require("./DiskInfo");
+// const dInf = require("./DiskInfo"); // temporarily unused because of docker limitations
 
 function execute(command, callback) {
   exec(command, function (error, stdout, stderr) {

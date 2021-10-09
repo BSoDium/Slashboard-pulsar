@@ -30,6 +30,10 @@ exports.getDiskInfo = async (req, res) => {
   }
 };
 
+/**
+ * Read disk info synchronously from /proc/diskstats and return an array of DiskInfo objects.
+ * @returns 
+ */
 exports.getDiskInfoSync = () => {
   try {
     const disks = [];

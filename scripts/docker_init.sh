@@ -11,11 +11,13 @@ import sys, json;
 print(json.load(sys.stdin)['security']['serverKey'])
 ")
 
-# check if the user has setup the correct bind mount for the .ssh directory
-if [ ! -e /host/proc/mounts ]; then
-	echo "Error : Please mount volume /proc/mounts at /host/proc/mounts"
-	exit 1
-fi
+# check if the user has setup the correct bind mount for the /proc/mount directory
+# Edit : this is not supported anymore because it would be impossible to set up
+# on windows-server machines.
+# if [ ! -e /host/proc/mounts ]; then
+# 	echo "Error : Please mount volume /proc/mounts at /host/proc/mounts"
+# 	exit 1
+# fi
 
 if [ $serverKey == "default" ]; then
 
