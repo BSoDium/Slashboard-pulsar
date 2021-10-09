@@ -48,7 +48,7 @@ echo "Do you want pulsar to run on system startup [Y/n] ?"
 read choice
 if [ $choice == "Y" -o $choice == "y" ]
 then
-  echo "\e[32m[Pulsar] \e[39mPlease follow the instructions displayed by the pm2 startup manager :"
+  echo "\e[32m[Pulsar] \e[39mPlease follow the instructions displayed by the pm2 startup manager, then run 'pm2 save' :"
   pm2 startup
 else
   echo Done.

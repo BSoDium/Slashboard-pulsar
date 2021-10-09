@@ -65,18 +65,24 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     ```sh
     pm2 startup # execute the command pm2 gives you
     ```
+
+  - Save the app list to be restored on reboot :
+    ```sh
+    pm2 save
+    ```
+
   
 ### Manual installation (Windows server)
   
   - Download [nodejs and npm](https://nodejs.org/)
   
   - Install pm2
-    ```cmd
+    ```ps
     npm install pm2 -g
     ```
     
   - Install pm2-windows-startup
-    ```cmd
+    ```ps
     npm install pm2-windows-startup -g
     pm2-startup install
     ```
@@ -85,14 +91,46 @@ A lightweight node js app designed to work with [the Slashboard desktop client](
     > Warning : no special characters allowed, only alphanumeric characters. Example : `CRml6VcWMGlH8UQ1XjintL1Tu71IA5ktbA5I8g0HzwrhF4E0hNE50O1ep7W2eNOu`
 
   - Start the app:
-    ```cmd
+    ```ps
     pm2 start ecosystem.config.js --env production
     ```
   
   - Setup pm2 to relaunch the app on system startup :
-    ```cmd
+    ```ps
     pm2 save
     ```
+
+### Docker installation
+
+*Note : This image is still in early access, some features do not fully work as expected.*
+
+- Broken on any OS :
+  > - Mounted disks view - the ones displayed don't match the host machine's state
+- Broken on Windows :
+  > - Hostname (host network mode doesn't exist on Windows)
+  > - CPU/RAM usage isn't impressively accurate
+  > - Network interface list
+___
+
+  - Pull the image from the repository, either from github or dockerhub
+  
+  - On Linux :
+    ```sh
+    docker run \
+    --network host \ 
+    --env SHAREDSECRET="64charSharedSecret"
+    l3alr0g/slashboard-pulsar:latest
+    ```
+    *SHAREDSECRET is optional. If not provided, it will be randomly generated on container creation.*
+  
+  - On Windows : 
+    ```ps
+    docker run `
+    -p 6033:6033 `
+    --env SHAREDSECRET="64charSharedSecret" `
+    l3alr0g/slashboard-pulsar:latest
+    ```
+    *Again, SHAREDSECRET isn't required.*
 
 ## Accessing your server from anywhere on the internet
  
