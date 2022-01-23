@@ -44,8 +44,8 @@ jobs:
 
       - name: Build images
         run: |
-          docker build -t BSoDium/slashboard-pulsar .
-          docker build -t ghcr.io/BSoDium/slashboard-pulsar .
+          docker build -t bsodium/slashboard-pulsar .
+          docker build -t ghcr.io/bsodium/slashboard-pulsar .
 
       - name: Login to DockerHub
         env:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Push to DockerHub
         run: |
-          docker push BSoDium/slashboard-pulsar:latest
+          docker push bsodium/slashboard-pulsar:latest
 
       - name: Logout
         run: |
@@ -86,7 +86,7 @@ jobs:
 
       - name: Push to GitHub Packages
         run: |
-          docker push ghcr.io/BSoDium/slashboard-pulsar:latest
+          docker push ghcr.io/bsodium/slashboard-pulsar:latest
 
       - name: Logout
         run: |
