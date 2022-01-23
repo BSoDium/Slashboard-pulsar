@@ -51,7 +51,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          echo ${{ env.TOKEN }} | docker login -u BSoDium --password-stdin
+          echo ${{ env.TOKEN }} | docker login -u bsodium --password-stdin
 
       - name: Push to DockerHub
         run: |
