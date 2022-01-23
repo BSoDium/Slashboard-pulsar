@@ -1,17 +1,17 @@
 # Slashboard Pulsar
-<img src="https://raw.githubusercontent.com/l3alr0g/Slashboard-pulsar/main/assets/icon.png" alt="Logo" width="100" align="left" />
+<img src="https://raw.githubusercontent.com/BSoDium/Slashboard-pulsar/main/assets/icon.png" alt="Logo" width="100" align="left" />
 
-A lightweight node js app designed to work with [the Slashboard desktop client](https://github.com/l3alr0g/Slashboard-desktop)
+A lightweight node js app designed to work with [the Slashboard desktop client](https://github.com/BSoDium/Slashboard-desktop)
 
 > Built using Node.js
 <br/>
- 
+
 ## Installation
 - Clone this repository somewhere safe on your server (`/var/www` is often a good choice)
   
   ```sh
   cd /var/www  # replace /var/www with the path you prefer if necessary
-  git clone https://github.com/l3alr0g/Slashboard-pulsar.git
+  git clone https://github.com/BSoDium/Slashboard-pulsar.git
   ```
   
 - Install all the necessary dependencies
@@ -119,7 +119,7 @@ ___
     docker run \
     --network host \ 
     --env SHAREDSECRET="64charSharedSecret"
-    l3alr0g/slashboard-pulsar:latest
+    BSoDium/slashboard-pulsar:latest
     ```
     *SHAREDSECRET is optional. If not provided, it will be randomly generated on container creation.*
   
@@ -128,7 +128,7 @@ ___
     docker run `
     -p 6033:6033 `
     --env SHAREDSECRET="64charSharedSecret" `
-    l3alr0g/slashboard-pulsar:latest
+    BSoDium/slashboard-pulsar:latest
     ```
     *Again, SHAREDSECRET isn't required.*
 

@@ -44,18 +44,18 @@ jobs:
 
       - name: Build images
         run: |
-          docker build -t l3alr0g/slashboard-pulsar .
-          docker build -t ghcr.io/l3alr0g/slashboard-pulsar .
+          docker build -t BSoDium/slashboard-pulsar .
+          docker build -t ghcr.io/BSoDium/slashboard-pulsar .
 
       - name: Login to DockerHub
         env:
           TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          echo ${{ env.TOKEN }} | docker login -u l3alr0g --password-stdin
+          echo ${{ env.TOKEN }} | docker login -u BSoDium --password-stdin
 
       - name: Push to DockerHub
         run: |
-          docker push l3alr0g/slashboard-pulsar:latest
+          docker push BSoDium/slashboard-pulsar:latest
 
       - name: Logout
         run: |
@@ -82,11 +82,11 @@ jobs:
         env:
           TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          echo ${{ env.TOKEN }} | docker login ghcr.io -u l3alr0g --password-stdin
+          echo ${{ env.TOKEN }} | docker login ghcr.io -u BSoDium --password-stdin
 
       - name: Push to GitHub Packages
         run: |
-          docker push ghcr.io/l3alr0g/slashboard-pulsar:latest
+          docker push ghcr.io/BSoDium/slashboard-pulsar:latest
 
       - name: Logout
         run: |
